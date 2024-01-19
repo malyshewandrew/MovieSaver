@@ -57,8 +57,12 @@ final class DefaultMainView: UIViewController {
         // MARK: NAVIGATION CONTROLLER:
 
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
-
+        navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .add, primaryAction: UIAction(handler: { [weak self] _ in
+            let addMovieView = DefaultAddMovieView()
+            self?.navigationController?.pushViewController(addMovieView, animated: true)
+        }))
+        navigationItem.backButtonTitle = ""
+        
         // MARK: TABLE VIEW:
 
         tableView.backgroundColor = .backgroundMainScreen
@@ -80,7 +84,14 @@ final class DefaultMainView: UIViewController {
             self?.movies = movie
         }
     }
+    
+//    @objc private func tapOnAddMovie() {
+//        print("test")
+//    }
+
 }
+
+
 
 // MARK: - EXTENSION FOR TABLE VIEW:
 

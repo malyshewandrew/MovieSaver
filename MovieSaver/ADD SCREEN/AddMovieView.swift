@@ -23,6 +23,16 @@ final class DefaultAddMovieView: UIViewController {
     // MARK: - CONFIGURE UI:
 
     private func configureUI() {
-        
+        // MARK: VIEW:
+
+        view.backgroundColor = .backgroundAddScreen
+        // MARK: TITLE:
+
+        title = "Add new"
+
+        // MARK: NAVIGATION CONTROLLER:
+
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: nil, action: nil)
     }
 }
