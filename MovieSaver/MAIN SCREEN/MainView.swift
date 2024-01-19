@@ -18,10 +18,7 @@ final class MainView: UIViewController {
         addSubviews()
         configureConstraints()
         configureUI()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(MainViewCell.self, forCellReuseIdentifier: "MainViewCell")
-        tableView.separatorStyle = .none
+        configureTableView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -64,6 +61,15 @@ final class MainView: UIViewController {
         // MARK: TABLE VIEW:
 
         tableView.backgroundColor = .backgroundMainScreen
+    }
+    
+    // MARK: - CONFIGURE TABLE VIEW:
+    
+    private func configureTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(MainViewCell.self, forCellReuseIdentifier: "MainViewCell")
+        tableView.separatorStyle = .none
     }
 
     // MARK: - LOAD MOVIES:
