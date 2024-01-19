@@ -19,11 +19,12 @@ final class MainView: UIViewController {
         configureConstraints()
         configureUI()
         configureTableView()
+        configureBindigs()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadMovies()
+        viewModel.loadMovies()
     }
 
     // MARK: - ADD SUBVIEWS:
@@ -72,20 +73,16 @@ final class MainView: UIViewController {
         tableView.separatorStyle = .none
     }
 
-    // MARK: - LOAD MOVIES:
+    // MARK: - CONFIGURE BINDINGS:
 
-    private func loadMovies() {
-        let operationResult = CoreDataManager.instance.getMovies()
-        switch operationResult {
-        case .success(let movies):
-            self.movies = movies
-        case .failure(let failure):
-            print(failure)
+    private func configureBindigs() {
+        viewModel.setupMovies = { [weak self] movie in
+            self?.movies = movie
         }
     }
 }
 
-// MARK: EXTENSION FOR TABLE VIEW:
+// MARK: - EXTENSION FOR TABLE VIEW:
 
 extension MainView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -94,7 +91,7 @@ extension MainView: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainViewCell", for: indexPath) as? MainViewCell else { return UITableViewCell() }
-        let movie = movies[indexPath.row]
+        let _ = movies[indexPath.row]
         return cell
     }
 }

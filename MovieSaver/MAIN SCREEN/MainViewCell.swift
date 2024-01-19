@@ -103,9 +103,9 @@ class MainViewCell: UITableViewCell {
     
     // MARK: CONFIGURE ENTITY:
 
-    func configureEntity(movie: Movie) {
-        movieImage.image = movie.imageMovie
-        nameLabel.text = movie.nameMovie
-        ratingLabel.text = movie.ratingMovie
-    }
+//    func configureEntity(movie: Movie) {
+//        movieImage.image = movie.imageMovie
+//        nameLabel.text = movie.nameMovie
+//        ratingLabel.text = movie.ratingMovie
+//    }
 }

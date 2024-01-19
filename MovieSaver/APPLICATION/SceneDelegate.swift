@@ -12,7 +12,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     private func startMainView() {
         let view = MainView()
-        let viewModel = MainViewModel()
+        let viewModel = DefaultMainViewModel()
         view.viewModel = viewModel
         let viewNavigationController = UINavigationController(rootViewController: view)
         window?.rootViewController = viewNavigationController
