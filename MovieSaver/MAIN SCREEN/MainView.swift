@@ -62,7 +62,7 @@ final class DefaultMainView: UIViewController {
             self?.navigationController?.pushViewController(addMovieView, animated: true)
         }))
         navigationItem.backButtonTitle = ""
-        
+
         // MARK: TABLE VIEW:
 
         tableView.backgroundColor = .backgroundMainScreen
@@ -84,14 +84,7 @@ final class DefaultMainView: UIViewController {
             self?.movies = movie
         }
     }
-    
-//    @objc private func tapOnAddMovie() {
-//        print("test")
-//    }
-
 }
-
-
 
 // MARK: - EXTENSION FOR TABLE VIEW:
 
