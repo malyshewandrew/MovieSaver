@@ -13,6 +13,10 @@ final class MainView: UIViewController {
         addSubviews()
         configureConstraints()
         configureUI()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(MainViewCell.self, forCellReuseIdentifier: "MainViewCell")
+        tableView.separatorStyle = .none
     }
 
     // MARK: - ADD SUBVIEWS:
@@ -51,4 +55,17 @@ final class MainView: UIViewController {
 
         tableView.backgroundColor = .backgroundMainScreen
     }
+}
+
+extension MainView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainViewCell", for: indexPath) as? MainViewCell else { return UITableViewCell() }
+        return cell
+    }
+    
+    
 }
