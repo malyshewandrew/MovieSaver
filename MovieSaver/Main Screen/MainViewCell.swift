@@ -29,7 +29,6 @@ class MainViewCell: UITableViewCell {
         contentView.addSubview(containerView)
         containerView.addSubviews(movieImage, infoView)
         infoView.addSubviews(nameLabel, ratingLabel)
-        
     }
     
     // MARK: - CONFIGURE CONSTRAINTS:
@@ -66,12 +65,14 @@ class MainViewCell: UITableViewCell {
     }
     
     // MARK: - CONFIGURE UI:
+
     private func configureUI() {
-        
         // MARK: CONTENT VIEW:
+
         contentView.backgroundColor = .backgroundMainScreen
         
         // MARK: CONTENTAINER VIEW:
+
         containerView.backgroundColor = .white
         containerView.layer.masksToBounds = true
         containerView.layer.cornerRadius = 8
@@ -79,18 +80,22 @@ class MainViewCell: UITableViewCell {
         containerView.layer.shadowOpacity = 0.10
         
         // MARK: MOVIE IMAGE:
+
         movieImage.backgroundColor = .systemBlue
         
         // MARK: INFO VIEW:
+
         infoView.backgroundColor = .systemGreen
         
         // MARK: NAME LABEL:
+
         nameLabel.text = "Spider Man No Way Home"
         nameLabel.numberOfLines = 0
         nameLabel.font = UIFont(name: "manrope-thin", size: 18)
         nameLabel.textAlignment = .center
         
         // MARK: RATING LABEL:
+
         ratingLabel.text = "8.9/10"
         ratingLabel.font = UIFont(name: "manrope-thin", size: 18)
         ratingLabel.textAlignment = .center
