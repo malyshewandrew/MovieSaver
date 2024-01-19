@@ -8,7 +8,7 @@ protocol MainViewModel {
 final class DefaultMainViewModel: MainViewModel {
     var setupMovies: (([Movie]) -> Void)?
 
-    // MARK: - LOAD MOVIES:
+    // MARK: LOAD MOVIES:
 
     func loadMovies() {
         let operationResult = CoreDataManager.instance.getMovies()
