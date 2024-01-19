@@ -100,4 +100,12 @@ class MainViewCell: UITableViewCell {
         ratingLabel.font = UIFont(name: "manrope-thin", size: 18)
         ratingLabel.textAlignment = .center
     }
+    
+    // MARK: CONFIGURE ENTITY:
+
+    func configureEntity(movie: Movie) {
+        movieImage.image = movie.imageMovie
+        nameLabel.text = movie.nameMovie
+        ratingLabel.text = movie.ratingMovie
+    }
 }

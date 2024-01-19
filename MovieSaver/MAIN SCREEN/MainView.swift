@@ -49,7 +49,7 @@ final class MainView: UIViewController {
 
         view.backgroundColor = .backgroundMainScreen
 
-        // MARK: - TITLE:
+        // MARK: TITLE:
 
         title = "My Movie List"
 
@@ -62,9 +62,9 @@ final class MainView: UIViewController {
 
         tableView.backgroundColor = .backgroundMainScreen
     }
-    
+
     // MARK: - CONFIGURE TABLE VIEW:
-    
+
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -85,6 +85,8 @@ final class MainView: UIViewController {
     }
 }
 
+// MARK: EXTENSION FOR TABLE VIEW:
+
 extension MainView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         movies.count
@@ -92,6 +94,7 @@ extension MainView: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainViewCell", for: indexPath) as? MainViewCell else { return UITableViewCell() }
+        let movie = movies[indexPath.row]
         return cell
     }
 }

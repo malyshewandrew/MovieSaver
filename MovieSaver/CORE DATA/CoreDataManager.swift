@@ -11,7 +11,7 @@ final class CoreDataManager {
 
     // MARK: - SAVE MOVIE:
 
-    func saveMovie(photoMovie: UIImage, nameMovie: String, ratingMovie: String, releaseDateMovie: String, youTubeLinkMovie: String, descriptionMovie: String) -> Result<Void, CoreDataError> {
+    func saveMovie(imageMovie: UIImage, nameMovie: String, ratingMovie: String, releaseDateMovie: String, youTubeLinkMovie: String, descriptionMovie: String) -> Result<Void, CoreDataError> {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             return .failure(.error("AppDelegate not found"))
         }
@@ -22,8 +22,8 @@ final class CoreDataManager {
 
         let movie = NSManagedObject(entity: entity, insertInto: managedContext)
 
-        if let imageData = photoMovie.pngData() {
-            movie.setValue(imageData, forKey: "photoMovie")
+        if let imageData = imageMovie.pngData() {
+            movie.setValue(imageData, forKey: "imageMovie")
         }
 
         movie.setValue(nameMovie, forKey: "nameMovie")
