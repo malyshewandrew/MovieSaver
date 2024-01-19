@@ -24,8 +24,8 @@ final class CoreDataManager {
 
         if let imageData = photoMovie.pngData() {
             movie.setValue(imageData, forKey: "photoMovie")
-          }
-        
+        }
+
         movie.setValue(nameMovie, forKey: "nameMovie")
         movie.setValue(ratingMovie, forKey: "ratingMovie")
         movie.setValue(releaseDateMovie, forKey: "releaseDateMovie")
@@ -40,7 +40,7 @@ final class CoreDataManager {
 
         return .success(())
     }
-    
+
     // MARK: - GET MOVIES:
 
     func getMovies() -> Result<[Movie], CoreDataError> {

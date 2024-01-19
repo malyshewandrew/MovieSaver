@@ -5,6 +5,11 @@ final class MainView: UIViewController {
 
     var viewModel: MainViewModel!
     private var tableView = UITableView()
+    var movies = [Movie]() {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     // MARK: - LIFECYCLE:
 
@@ -17,6 +22,11 @@ final class MainView: UIViewController {
         tableView.dataSource = self
         tableView.register(MainViewCell.self, forCellReuseIdentifier: "MainViewCell")
         tableView.separatorStyle = .none
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadMovies()
     }
 
     // MARK: - ADD SUBVIEWS:
@@ -55,17 +65,27 @@ final class MainView: UIViewController {
 
         tableView.backgroundColor = .backgroundMainScreen
     }
+
+    // MARK: - LOAD MOVIES:
+
+    private func loadMovies() {
+        let operationResult = CoreDataManager.instance.getMovies()
+        switch operationResult {
+        case .success(let movies):
+            self.movies = movies
+        case .failure(let failure):
+            print(failure)
+        }
+    }
 }
 
 extension MainView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        movies.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainViewCell", for: indexPath) as? MainViewCell else { return UITableViewCell() }
         return cell
     }
-    
-    
 }
