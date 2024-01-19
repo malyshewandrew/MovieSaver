@@ -1,6 +1,6 @@
 import UIKit
 
-final class MainView: UIViewController {
+final class DefaultMainView: UIViewController {
     // MARK: - PROPERTIES:
 
     var viewModel: MainViewModel!
@@ -84,7 +84,7 @@ final class MainView: UIViewController {
 
 // MARK: - EXTENSION FOR TABLE VIEW:
 
-extension MainView: UITableViewDelegate, UITableViewDataSource {
+extension DefaultMainView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         movies.count
     }
