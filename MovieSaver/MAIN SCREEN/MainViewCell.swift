@@ -1,6 +1,6 @@
 import UIKit
 
-class MainViewCell: UITableViewCell {
+final class MainViewCell: UITableViewCell {
     // MARK: - PROPERTIES:
     
     private let containerView = UIView()

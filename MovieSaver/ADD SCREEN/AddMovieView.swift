@@ -4,6 +4,8 @@ import UIKit
 final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelegate {
     // MARK: - PROPERTIES:
 
+    var viewModel: AddMovieViewModel!
+
     private let addImageView = UIImageView()
     private let openAlertButton = UIButton()
 
@@ -11,22 +13,22 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
     private let nameTitleLabel = UILabel()
     private let nameLabel = UILabel()
     private let nameChangeButton = UIButton()
-    
+
     private let ratingStackView = UIStackView()
     private let ratingLabel = UILabel()
     private let ratingValueLabel = UILabel()
     private let ratingChangeButton = UIButton()
-    
+
     private let releaseStackView = UIStackView()
     private let releaseLabel = UILabel()
     private let releaseDateLabel = UILabel()
     private let releaseChangeButton = UIButton()
-    
+
     private let youtubeStackView = UIStackView()
     private let youtubeLabel = UILabel()
     private let youtubeLink = UILabel()
     private let youtubeChangeButton = UIButton()
-    
+
     private let descriptionLabel = UILabel()
     private let textView = UITextView()
 
@@ -73,7 +75,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         nameStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40).isActive = true
         nameStackView.heightAnchor.constraint(equalToConstant: 84).isActive = true
         nameStackView.widthAnchor.constraint(equalToConstant: 125).isActive = true
-        
+
         // MARK: RATING STACK VIEW:
 
         ratingStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -81,7 +83,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         ratingStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40).isActive = true
         ratingStackView.heightAnchor.constraint(equalToConstant: 84).isActive = true
         ratingStackView.widthAnchor.constraint(equalToConstant: 125).isActive = true
-        
+
         // MARK: RELEASE STACK VIEW:
 
         releaseStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -89,7 +91,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         releaseStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40).isActive = true
         releaseStackView.heightAnchor.constraint(equalToConstant: 84).isActive = true
         releaseStackView.widthAnchor.constraint(equalToConstant: 125).isActive = true
-        
+
         // MARK: YOUTUBE STACK VIEW:
 
         youtubeStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -97,14 +99,16 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         youtubeStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40).isActive = true
         youtubeStackView.heightAnchor.constraint(equalToConstant: 84).isActive = true
         youtubeStackView.widthAnchor.constraint(equalToConstant: 125).isActive = true
-        
+
         // MARK: DESCRIPTION LABEL:
+
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         descriptionLabel.topAnchor.constraint(equalTo: releaseStackView.bottomAnchor, constant: 36).isActive = true
         descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32).isActive = true
         descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
-        
+
         // MARK: TEXT VIEW:
+
         textView.translatesAutoresizingMaskIntoConstraints = false
         textView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 11).isActive = true
         textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32).isActive = true
@@ -127,6 +131,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
 
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: nil, action: nil)
+        navigationItem.backButtonTitle = ""
 
         // MARK: IMAGE VIEW:
 
@@ -149,87 +154,114 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
 
         nameTitleLabel.text = "Name"
         nameTitleLabel.textColor = .black
-        
+
         // MARK: NAME LABEL:
 
         nameLabel.text = "-"
         nameLabel.textColor = .black
-        
+
         // MARK: NAME CHANGE BUTTON:
 
         nameChangeButton.setTitle("Change", for: .normal)
         nameChangeButton.setTitleColor(.systemBlue, for: .normal)
-        
+        nameChangeButton.addTarget(self, action: #selector(tapOnNameChangeButton), for: .touchUpInside)
+
         // MARK: RATING STACK VIEW:
 
         ratingStackView.axis = .vertical
         ratingStackView.alignment = .center
-        
+
         // MARK: RATING LABEL:
 
         ratingLabel.text = "Your Rating"
         ratingLabel.textColor = .black
-        
+
         // MARK: RATING VALUES:
 
         ratingValueLabel.text = "-"
         ratingValueLabel.textColor = .black
-        
+
         // MARK: RATING CHANGE BUTTON:
 
         ratingChangeButton.setTitle("Change", for: .normal)
         ratingChangeButton.setTitleColor(.systemBlue, for: .normal)
-        
+        ratingChangeButton.addTarget(self, action: #selector(tapOnRatingChangeButton), for: .touchUpInside)
+
         // MARK: RELEASE STACK VIEW:
 
         releaseStackView.axis = .vertical
         releaseStackView.alignment = .center
-        
+
         // MARK: RELEASE LABEL:
 
         releaseLabel.text = "Release Date"
         releaseLabel.textColor = .black
-        
+
         // MARK: RELEASE DATE LABEL:
 
         releaseDateLabel.text = "-"
         releaseDateLabel.textColor = .black
-        
+
         // MARK: RELEASE CHANGE BUTTON:
 
         releaseChangeButton.setTitle("Change", for: .normal)
         releaseChangeButton.setTitleColor(.systemBlue, for: .normal)
-        
+        releaseChangeButton.addTarget(self, action: #selector(tapOnReleaseChangeButton), for: .touchUpInside)
+
         // MARK: YOUTUBE STACK VIEW:
 
         youtubeStackView.axis = .vertical
         youtubeStackView.alignment = .center
-        
+
         // MARK: YOUTUBE LABEL:
 
         youtubeLabel.text = "YouTube Link"
         youtubeLabel.textColor = .black
-        
+
         // MARK: YOUTUBE LINK:
 
         youtubeLink.text = "-"
         youtubeLink.textColor = .black
-        
+
         // MARK: YOUTUBE CHANGE BUTTON:
 
         youtubeChangeButton.setTitle("Change", for: .normal)
         youtubeChangeButton.setTitleColor(.systemBlue, for: .normal)
-        
+        youtubeChangeButton.addTarget(self, action: #selector(tapOnYoutubeChangeButton), for: .touchUpInside)
+
         // MARK: DESCRIPTION LABEL:
-        
+
         descriptionLabel.text = "Description"
         descriptionLabel.textAlignment = .center
-        
+
         // MARK: TEXT VIEW:
+
         textView.text = "Description"
     }
 
-    // MARK: ALERT BUTOON:
+    
+    // MARK: TRANSITIONS:
+    @objc func tapOnNameChangeButton() {
+        let nameScreenView = DefaultNameScreenView()
+        navigationController?.pushViewController(nameScreenView, animated: true)
+    }
+    
+    @objc func tapOnRatingChangeButton() {
+        let ratingScreenView = DefaultRatingScreenView()
+        navigationController?.pushViewController(ratingScreenView, animated: true)
+    }
+    
+    @objc func tapOnReleaseChangeButton() {
+        let releaseScreenView = DefaultReleaseScreenView()
+        navigationController?.pushViewController(releaseScreenView, animated: true)
+    }
+    
+    @objc func tapOnYoutubeChangeButton() {
+        let youtubeScreenView = DefaultYoutubeScreenView()
+        navigationController?.pushViewController(youtubeScreenView, animated: true)
+    }
+
+    // MARK: - ALERT BUTOON:
 
     @objc func tapOnALertButton() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -270,7 +302,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
     }
 }
 
-// MARK: EXTENSION:
+// MARK: - EXTENSION:
 
 extension DefaultAddMovieView: PHPickerViewControllerDelegate {
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {

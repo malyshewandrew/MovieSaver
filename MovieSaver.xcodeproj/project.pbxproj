@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB173E002B5EA900004DF7B1 /* RatingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB173DFF2B5EA900004DF7B1 /* RatingScreenView.swift */; };
+		FB173E022B5EA90C004DF7B1 /* RatingScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB173E012B5EA90C004DF7B1 /* RatingScreenViewModel.swift */; };
+		FB173E042B5EB42B004DF7B1 /* ReleaseScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB173E032B5EB42B004DF7B1 /* ReleaseScreenView.swift */; };
+		FB173E062B5EB437004DF7B1 /* ReleaseScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB173E052B5EB437004DF7B1 /* ReleaseScreenViewModel.swift */; };
+		FB173E082B5EB5CF004DF7B1 /* NameScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB173E072B5EB5CF004DF7B1 /* NameScreenView.swift */; };
+		FB173E0A2B5EB5DB004DF7B1 /* NameScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB173E092B5EB5DB004DF7B1 /* NameScreenViewModel.swift */; };
+		FB173E0C2B5EB974004DF7B1 /* YoutubeScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB173E0B2B5EB974004DF7B1 /* YoutubeScreenView.swift */; };
+		FB173E0E2B5EB983004DF7B1 /* YoutubeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB173E0D2B5EB983004DF7B1 /* YoutubeScreenViewModel.swift */; };
 		FB1BE2A42B5A7EC600EE9350 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1BE2A32B5A7EC600EE9350 /* Extension.swift */; };
 		FB1BE2A72B5A7FB100EE9350 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1BE2A62B5A7FB100EE9350 /* MainView.swift */; };
 		FB1BE2A92B5A7FC300EE9350 /* DefaultMainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB1BE2A82B5A7FC300EE9350 /* DefaultMainViewModel.swift */; };
@@ -29,6 +37,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FB173DFF2B5EA900004DF7B1 /* RatingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingScreenView.swift; sourceTree = "<group>"; };
+		FB173E012B5EA90C004DF7B1 /* RatingScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingScreenViewModel.swift; sourceTree = "<group>"; };
+		FB173E032B5EB42B004DF7B1 /* ReleaseScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseScreenView.swift; sourceTree = "<group>"; };
+		FB173E052B5EB437004DF7B1 /* ReleaseScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseScreenViewModel.swift; sourceTree = "<group>"; };
+		FB173E072B5EB5CF004DF7B1 /* NameScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameScreenView.swift; sourceTree = "<group>"; };
+		FB173E092B5EB5DB004DF7B1 /* NameScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NameScreenViewModel.swift; sourceTree = "<group>"; };
+		FB173E0B2B5EB974004DF7B1 /* YoutubeScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeScreenView.swift; sourceTree = "<group>"; };
+		FB173E0D2B5EB983004DF7B1 /* YoutubeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeScreenViewModel.swift; sourceTree = "<group>"; };
 		FB1BE2A32B5A7EC600EE9350 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		FB1BE2A62B5A7FB100EE9350 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		FB1BE2A82B5A7FC300EE9350 /* DefaultMainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultMainViewModel.swift; sourceTree = "<group>"; };
@@ -63,6 +79,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FB173DFE2B5EA8DC004DF7B1 /* Changes */ = {
+			isa = PBXGroup;
+			children = (
+				FB173DFF2B5EA900004DF7B1 /* RatingScreenView.swift */,
+				FB173E012B5EA90C004DF7B1 /* RatingScreenViewModel.swift */,
+				FB173E032B5EB42B004DF7B1 /* ReleaseScreenView.swift */,
+				FB173E052B5EB437004DF7B1 /* ReleaseScreenViewModel.swift */,
+				FB173E072B5EB5CF004DF7B1 /* NameScreenView.swift */,
+				FB173E092B5EB5DB004DF7B1 /* NameScreenViewModel.swift */,
+				FB173E0B2B5EB974004DF7B1 /* YoutubeScreenView.swift */,
+				FB173E0D2B5EB983004DF7B1 /* YoutubeScreenViewModel.swift */,
+			);
+			path = Changes;
+			sourceTree = "<group>";
+		};
 		FB1BE2A52B5A7F8E00EE9350 /* MAIN SCREEN */ = {
 			isa = PBXGroup;
 			children = (
@@ -106,6 +137,7 @@
 			children = (
 				FB87D1FC2B5B0DBE00541723 /* AddMovieView.swift */,
 				FB87D1FE2B5B0DD700541723 /* AddMovieViewModel.swift */,
+				FB173DFE2B5EA8DC004DF7B1 /* Changes */,
 			);
 			path = "ADD SCREEN";
 			sourceTree = "<group>";
@@ -232,15 +264,23 @@
 			files = (
 				FB1BE2A92B5A7FC300EE9350 /* DefaultMainViewModel.swift in Sources */,
 				FB1BE2A42B5A7EC600EE9350 /* Extension.swift in Sources */,
+				FB173E062B5EB437004DF7B1 /* ReleaseScreenViewModel.swift in Sources */,
 				FB1BE2A72B5A7FB100EE9350 /* MainView.swift in Sources */,
 				FB942B852B5A7B99004DC167 /* MovieSaver.xcdatamodeld in Sources */,
 				FB87D1FD2B5B0DBE00541723 /* AddMovieView.swift in Sources */,
+				FB173E002B5EA900004DF7B1 /* RatingScreenView.swift in Sources */,
 				FB942B7F2B5A7B99004DC167 /* ViewController.swift in Sources */,
 				FB1BE2AB2B5A8A1200EE9350 /* MainViewCell.swift in Sources */,
+				FB173E0E2B5EB983004DF7B1 /* YoutubeScreenViewModel.swift in Sources */,
+				FB173E0A2B5EB5DB004DF7B1 /* NameScreenViewModel.swift in Sources */,
 				FB87D1F72B5AAC0C00541723 /* CoreDataManager.swift in Sources */,
 				FB87D1FF2B5B0DD700541723 /* AddMovieViewModel.swift in Sources */,
+				FB173E082B5EB5CF004DF7B1 /* NameScreenView.swift in Sources */,
+				FB173E042B5EB42B004DF7B1 /* ReleaseScreenView.swift in Sources */,
+				FB173E0C2B5EB974004DF7B1 /* YoutubeScreenView.swift in Sources */,
 				FB942B7B2B5A7B99004DC167 /* AppDelegate.swift in Sources */,
 				FB942B7D2B5A7B99004DC167 /* SceneDelegate.swift in Sources */,
+				FB173E022B5EA90C004DF7B1 /* RatingScreenViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
