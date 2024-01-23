@@ -8,7 +8,6 @@ final class DefaultRatingScreenView: UIViewController {
     private let saveButton = UIButton()
     
     private let ratings: [Float] = Array(stride(from: 0.0, through: 10.0, by: 0.1))
-    private var selectedRating: Float?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -84,13 +83,12 @@ extension DefaultRatingScreenView: UIPickerViewDelegate, UIPickerViewDataSource 
         return ratings.count
     }
 
-    // MARK: UIPickerViewDelegate
-
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return String(ratings[row])
+        return String(format: "%.1f", ratings[row])
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedRating = ratings[row]
+        let selectedValue = ratings[row]
+        print("Selected value: \(selectedValue)")
     }
 }

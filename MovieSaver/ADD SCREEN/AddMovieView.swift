@@ -239,7 +239,6 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
 
         textView.text = "Description"
     }
-
     
     // MARK: TRANSITIONS:
     @objc func tapOnNameChangeButton() {
