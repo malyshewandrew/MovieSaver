@@ -7,7 +7,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
     var viewModel: AddMovieViewModel!
 
     private let addImageView = UIImageView()
-    private let openAlertButton = UIButton()
+    private let addImageButton = UIButton()
 
     private let nameStackView = UIStackView()
     private let nameTitleLabel = UILabel()
@@ -42,7 +42,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
     // MARK: - ADD SUBVIEWS:
 
     private func addSubviews() {
-        view.addSubviews(addImageView, openAlertButton, nameStackView, ratingStackView, releaseStackView, youtubeStackView, descriptionLabel, textView)
+        view.addSubviews(addImageView, addImageButton, nameStackView, ratingStackView, releaseStackView, youtubeStackView, descriptionLabel, textView)
         nameStackView.addArrangedSubviews(nameTitleLabel, nameLabel, nameChangeButton)
         ratingStackView.addArrangedSubviews(ratingLabel, ratingValueLabel, ratingChangeButton)
         releaseStackView.addArrangedSubviews(releaseLabel, releaseDateLabel, releaseChangeButton)
@@ -62,16 +62,16 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
 
         // MARK: OPEN ALERT:
 
-        openAlertButton.translatesAutoresizingMaskIntoConstraints = false
-        openAlertButton.centerXAnchor.constraint(equalTo: addImageView.centerXAnchor).isActive = true
-        openAlertButton.centerYAnchor.constraint(equalTo: addImageView.centerYAnchor).isActive = true
-        openAlertButton.heightAnchor.constraint(equalTo: addImageView.heightAnchor, multiplier: 1).isActive = true
-        openAlertButton.widthAnchor.constraint(equalTo: addImageView.widthAnchor, multiplier: 1).isActive = true
+        addImageButton.translatesAutoresizingMaskIntoConstraints = false
+        addImageButton.centerXAnchor.constraint(equalTo: addImageView.centerXAnchor).isActive = true
+        addImageButton.centerYAnchor.constraint(equalTo: addImageView.centerYAnchor).isActive = true
+        addImageButton.heightAnchor.constraint(equalTo: addImageView.heightAnchor, multiplier: 1).isActive = true
+        addImageButton.widthAnchor.constraint(equalTo: addImageView.widthAnchor, multiplier: 1).isActive = true
 
         // MARK: NAME STACK VIEW:
 
         nameStackView.translatesAutoresizingMaskIntoConstraints = false
-        nameStackView.topAnchor.constraint(equalTo: openAlertButton.bottomAnchor, constant: 32).isActive = true
+        nameStackView.topAnchor.constraint(equalTo: addImageButton.bottomAnchor, constant: 32).isActive = true
         nameStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40).isActive = true
         nameStackView.heightAnchor.constraint(equalToConstant: 84).isActive = true
         nameStackView.widthAnchor.constraint(equalToConstant: 125).isActive = true
@@ -79,7 +79,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         // MARK: RATING STACK VIEW:
 
         ratingStackView.translatesAutoresizingMaskIntoConstraints = false
-        ratingStackView.topAnchor.constraint(equalTo: openAlertButton.bottomAnchor, constant: 32).isActive = true
+        ratingStackView.topAnchor.constraint(equalTo: addImageButton.bottomAnchor, constant: 32).isActive = true
         ratingStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40).isActive = true
         ratingStackView.heightAnchor.constraint(equalToConstant: 84).isActive = true
         ratingStackView.widthAnchor.constraint(equalToConstant: 125).isActive = true
@@ -141,9 +141,9 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
 
         // MARK: SELECT IMAGE BUTTON:
 
-        openAlertButton.backgroundColor = .clear
-        openAlertButton.setImage(UIImage(named: "addImageMovieView"), for: .normal)
-        openAlertButton.addTarget(self, action: #selector(tapOnALertButton), for: .touchUpInside)
+        addImageButton.backgroundColor = .clear
+        addImageButton.setImage(UIImage(named: "addImageMovieView"), for: .normal)
+        addImageButton.addTarget(self, action: #selector(tapOnALertButton), for: .touchUpInside)
 
         // MARK: NAME STACK VIEW:
 
@@ -261,7 +261,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         navigationController?.pushViewController(youtubeScreenView, animated: true)
     }
 
-    // MARK: - ALERT BUTOON:
+    // MARK: - ALERT BUTTON:
 
     @objc func tapOnALertButton() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -312,7 +312,7 @@ extension DefaultAddMovieView: PHPickerViewControllerDelegate {
                 if let image = image as? UIImage {
                     DispatchQueue.main.async {
                         self.addImageView.image = image
-                        self.openAlertButton.setImage(UIImage(), for: .normal)
+                        self.addImageButton.setImage(UIImage(), for: .normal)
                     }
                 }
             }
