@@ -37,6 +37,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         addSubviews()
         configureConstraints()
         configureUI()
+        configureBindigs()
     }
 
     // MARK: - ADD SUBVIEWS:
@@ -143,7 +144,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
 
         addImageButton.backgroundColor = .clear
         addImageButton.setImage(UIImage(named: "addImageMovieView"), for: .normal)
-        addImageButton.addTarget(self, action: #selector(tapOnALertButton), for: .touchUpInside)
+        addImageButton.addTarget(self, action: #selector(tapOnAlertButton), for: .touchUpInside)
 
         // MARK: NAME STACK VIEW:
 
@@ -260,47 +261,53 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         let youtubeScreenView = DefaultYoutubeScreenView()
         navigationController?.pushViewController(youtubeScreenView, animated: true)
     }
+    
+    // MARK: - CONFIGURE BINDINGS:
 
+    private func configureBindigs() {
+        viewModel.setupAlert = { [weak self] alert in
+            self?.present(alert, animated: true)
+        }
+        
+        viewModel.setupPHPicker = { [weak self] picker in
+            picker.delegate = self
+            self?.present(picker, animated: true)
+        }
+        
+        viewModel.setupUIImagePicker = { [weak self] imagePicker in
+            imagePicker.delegate = self
+            self?.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
     // MARK: - ALERT BUTTON:
 
-    @objc func tapOnALertButton() {
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Камера", style: .default, handler: { _ in
-            self.openCamera()
-        }))
-        alert.addAction(UIAlertAction(title: "Галерея", style: .default, handler: { _ in
-            self.openGalery()
-        }))
-        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: { _ in
-
-        }))
-        present(alert, animated: true)
+    @objc func tapOnAlertButton() {
+        viewModel?.tapOnALertButton()
     }
 
     // MARK: OPEN GALERY:
 
     @objc func openGalery() {
-        var configurator = PHPickerConfiguration(photoLibrary: .shared())
-        configurator.filter = .images
-        configurator.selectionLimit = 1
-        let picker = PHPickerViewController(configuration: configurator)
-        picker.delegate = self
-        present(picker, animated: true)
+        viewModel.openGalery()
     }
 
     // MARK: OPEN CAMERA:
 
     @objc func openCamera() {
-        let imagePicker = UIImagePickerController()
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            imagePicker.sourceType = .camera
-            imagePicker.delegate = self
-            present(imagePicker, animated: true, completion: nil)
-        } else {
-            print("Камера не доступна")
+        viewModel.openCamera()
+    }
+    
+    private func setupImage(image: UIImage?) {
+        if let image = image {
+            DispatchQueue.main.async {
+                self.addImageView.image = image
+                self.addImageButton.setImage(UIImage(), for: .normal)
+            }
         }
     }
 }
+
 
 // MARK: - EXTENSION:
 
@@ -309,12 +316,7 @@ extension DefaultAddMovieView: PHPickerViewControllerDelegate {
         let itemProvider = results.first?.itemProvider
         if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
             itemProvider.loadObject(ofClass: UIImage.self) { image, _ in
-                if let image = image as? UIImage {
-                    DispatchQueue.main.async {
-                        self.addImageView.image = image
-                        self.addImageButton.setImage(UIImage(), for: .normal)
-                    }
-                }
+                self.setupImage(image: image as? UIImage)
             }
         }
         dismiss(animated: true)

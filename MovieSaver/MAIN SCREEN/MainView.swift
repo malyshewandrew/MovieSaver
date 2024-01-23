@@ -19,7 +19,7 @@ final class DefaultMainView: UIViewController {
         configureConstraints()
         configureUI()
         configureTableView()
-        configureBindigs()
+        configureBindings()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -58,8 +58,7 @@ final class DefaultMainView: UIViewController {
 
         navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .add, primaryAction: UIAction(handler: { [weak self] _ in
-            let addMovieView = DefaultAddMovieView()
-            self?.navigationController?.pushViewController(addMovieView, animated: true)
+            self?.transitionOnAddMovieView()
         }))
         navigationItem.backButtonTitle = ""
 
@@ -79,10 +78,20 @@ final class DefaultMainView: UIViewController {
 
     // MARK: - CONFIGURE BINDINGS:
 
-    private func configureBindigs() {
+    private func configureBindings() {
         viewModel.setupMovies = { [weak self] movie in
             self?.movies = movie
         }
+
+        viewModel.transition = { [weak self] addMovieView in
+            self?.navigationController?.pushViewController(addMovieView, animated: true)
+        }
+    }
+
+    // MARK: TRANSITION ON ADD MOVIE VIEW:
+
+    private func transitionOnAddMovieView() {
+        viewModel.transitionAddNewMovie()
     }
 }
 
