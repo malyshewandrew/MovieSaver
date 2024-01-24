@@ -39,6 +39,10 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         configureUI()
         configureBindigs()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
 
     // MARK: - ADD SUBVIEWS:
 
@@ -242,23 +246,19 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
     
     // MARK: TRANSITIONS:
     @objc func tapOnNameChangeButton() {
-        let nameScreenView = DefaultNameScreenView()
-        navigationController?.pushViewController(nameScreenView, animated: true)
+        viewModel.transitionNameScreen()
     }
     
     @objc func tapOnRatingChangeButton() {
-        let ratingScreenView = DefaultRatingScreenView()
-        navigationController?.pushViewController(ratingScreenView, animated: true)
+        viewModel.transitionRatingScreen()
     }
     
     @objc func tapOnReleaseChangeButton() {
-        let releaseScreenView = DefaultReleaseScreenView()
-        navigationController?.pushViewController(releaseScreenView, animated: true)
+        viewModel.transitionReleaseScreen()
     }
     
     @objc func tapOnYoutubeChangeButton() {
-        let youtubeScreenView = DefaultYoutubeScreenView()
-        navigationController?.pushViewController(youtubeScreenView, animated: true)
+        viewModel.transitionYoutubeScreen()
     }
     
     // MARK: - CONFIGURE BINDINGS:
@@ -277,6 +277,23 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
             imagePicker.delegate = self
             self?.present(imagePicker, animated: true, completion: nil)
         }
+        
+        viewModel.transitionNameScreenView = { [weak self] nameScreenView in
+            self?.navigationController?.pushViewController(nameScreenView, animated: true)
+        }
+        
+        viewModel.transitionRatingScreenView = { [weak self] ratingScreenView in
+            self?.navigationController?.pushViewController(ratingScreenView, animated: true)
+        }
+        
+        viewModel.transitionReleaseScreenView = { [weak self] releaseScreenView in
+            self?.navigationController?.pushViewController(releaseScreenView, animated: true)
+        }
+        
+        viewModel.transitionYoutubeScreenView = { [weak self] youScreenView in
+            self?.navigationController?.pushViewController(youScreenView, animated: true)
+        }
+        
     }
     
     // MARK: - ALERT BUTTON:

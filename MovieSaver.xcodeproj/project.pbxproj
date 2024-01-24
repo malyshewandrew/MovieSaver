@@ -79,17 +79,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		FB173DFE2B5EA8DC004DF7B1 /* Changes */ = {
+		FB01FCD02B61870B000863D7 /* Rating */ = {
 			isa = PBXGroup;
 			children = (
 				FB173DFF2B5EA900004DF7B1 /* RatingScreenView.swift */,
 				FB173E012B5EA90C004DF7B1 /* RatingScreenViewModel.swift */,
+			);
+			path = Rating;
+			sourceTree = "<group>";
+		};
+		FB01FCD12B618719000863D7 /* Release */ = {
+			isa = PBXGroup;
+			children = (
 				FB173E032B5EB42B004DF7B1 /* ReleaseScreenView.swift */,
 				FB173E052B5EB437004DF7B1 /* ReleaseScreenViewModel.swift */,
+			);
+			path = Release;
+			sourceTree = "<group>";
+		};
+		FB01FCD22B618724000863D7 /* Name */ = {
+			isa = PBXGroup;
+			children = (
 				FB173E072B5EB5CF004DF7B1 /* NameScreenView.swift */,
 				FB173E092B5EB5DB004DF7B1 /* NameScreenViewModel.swift */,
+			);
+			path = Name;
+			sourceTree = "<group>";
+		};
+		FB01FCD32B61872F000863D7 /* Youtube */ = {
+			isa = PBXGroup;
+			children = (
 				FB173E0B2B5EB974004DF7B1 /* YoutubeScreenView.swift */,
 				FB173E0D2B5EB983004DF7B1 /* YoutubeScreenViewModel.swift */,
+			);
+			path = Youtube;
+			sourceTree = "<group>";
+		};
+		FB173DFE2B5EA8DC004DF7B1 /* Changes */ = {
+			isa = PBXGroup;
+			children = (
+				FB01FCD32B61872F000863D7 /* Youtube */,
+				FB01FCD22B618724000863D7 /* Name */,
+				FB01FCD12B618719000863D7 /* Release */,
+				FB01FCD02B61870B000863D7 /* Rating */,
 			);
 			path = Changes;
 			sourceTree = "<group>";

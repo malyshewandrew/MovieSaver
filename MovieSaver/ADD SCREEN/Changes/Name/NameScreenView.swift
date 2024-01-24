@@ -3,6 +3,8 @@ import UIKit
 final class DefaultNameScreenView: UIViewController {
     // MARK: - PROPERTIES:
 
+    var viewModel: NameScreenViewModel!
+
     private let movieNameLabel = UILabel()
     private let textField = UITextField()
     private let lineTextFieldLabel = UILabel()
@@ -72,7 +74,7 @@ final class DefaultNameScreenView: UIViewController {
         // MARK: TEXT FIELD:
 
         textField.placeholder = "Name"
-        
+
         // MARK: LINE TEXT FIELD:
 
         lineTextFieldLabel.backgroundColor = .systemGray4
@@ -81,5 +83,10 @@ final class DefaultNameScreenView: UIViewController {
 
         saveButton.setTitle("Save", for: .normal)
         saveButton.setTitleColor(.systemBlue, for: .normal)
+        saveButton.addTarget(self, action: #selector(tapOnSave), for: .touchUpInside)
+    }
+
+    @objc func tapOnSave() {
+        viewModel.setName()
     }
 }

@@ -2,6 +2,8 @@ import UIKit
 
 final class DefaultYoutubeScreenView: UIViewController {
     // MARK: - PROPERTIES:
+    
+    var viewModel: YoutubeScreenViewModel!
 
     private let youtubeLinkLabel = UILabel()
     private let textField = UITextField()

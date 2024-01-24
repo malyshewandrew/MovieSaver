@@ -2,6 +2,8 @@ import UIKit
 
 final class DefaultReleaseScreenView: UIViewController {
     // MARK: - PROPERTIES:
+    
+    var viewModel: ReleaseScreenViewModel!
 
     private let releaseDateLabel = UILabel()
     private let datePicker = UIDatePicker()

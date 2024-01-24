@@ -2,6 +2,8 @@ import UIKit
 
 final class DefaultRatingScreenView: UIViewController {
     // MARK: - PROPERTIES:
+    
+    var viewModel: RatingScreenViewModel!
 
     private let yourRatingLabel = UILabel()
     private let pickerView = UIPickerView()
