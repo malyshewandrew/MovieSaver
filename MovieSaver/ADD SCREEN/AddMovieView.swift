@@ -280,6 +280,9 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         
         viewModel.transitionNameScreenView = { [weak self] nameScreenView in
             self?.navigationController?.pushViewController(nameScreenView, animated: true)
+            nameScreenView.viewModel.setNameCLosure = { [weak self] name in
+                self?.nameLabel.text = name
+            }
         }
         
         viewModel.transitionRatingScreenView = { [weak self] ratingScreenView in
@@ -293,7 +296,6 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         viewModel.transitionYoutubeScreenView = { [weak self] youScreenView in
             self?.navigationController?.pushViewController(youScreenView, animated: true)
         }
-        
     }
     
     // MARK: - ALERT BUTTON:

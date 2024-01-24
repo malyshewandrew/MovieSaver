@@ -86,7 +86,20 @@ final class DefaultNameScreenView: UIViewController {
         saveButton.addTarget(self, action: #selector(tapOnSave), for: .touchUpInside)
     }
 
+    private func configureBingings() {
+        viewModel.setNameCLosure = { [weak self] name in
+            self?.textField.text = name
+        }
+    }
+    
+    private func getText() -> String? {
+        let text = self.textField.text
+        return text
+    }
+
     @objc func tapOnSave() {
-        viewModel.setName()
+        if let name = getText() {
+            viewModel.setName(string: name)
+        }
     }
 }
