@@ -98,9 +98,13 @@ final class DefaultMainView: UIViewController {
 // MARK: - EXTENSION FOR TABLE VIEW:
 
 extension DefaultMainView: UITableViewDelegate, UITableViewDataSource {
+    // MARK: COUNTS OF CELLS:
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         movies.count
     }
+
+    // MARK: CUSTOM CELL:
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainViewCell", for: indexPath) as? MainViewCell else { return UITableViewCell() }
@@ -108,9 +112,9 @@ extension DefaultMainView: UITableViewDelegate, UITableViewDataSource {
         cell.configureEntity(movie: movie)
         return cell
     }
-    
+
     // MARK: DELETE CAR:
-    
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let movie = movies[indexPath.row]
         if editingStyle == .delete {
@@ -122,5 +126,9 @@ extension DefaultMainView: UITableViewDelegate, UITableViewDataSource {
             }))
             present(alertDelete, animated: true)
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
     }
 }

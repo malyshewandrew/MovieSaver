@@ -309,8 +309,8 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
                 self?.youtubeLink.text = youtube
             }
         }
-        
-        viewModel.saveNewFilmClosure = { [weak self] alert in
+
+        viewModel.saveNewMovieClosure = { [weak self] alert in
             self?.present(alert, animated: true)
         }
     }
@@ -345,13 +345,8 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
     // MARK: - SAVE NEW MOVIE:
 
     private func saveMovie() {
-        guard let imageMovie = addImageView.image?.jpegData(compressionQuality: 1.0),
-              let nameMovie = nameLabel.text,
-              let ratingMovie = ratingValueLabel.text,
-              let releaseDateMovie = releaseDateLabel.text,
-              let youTubeLinkMovie = youtubeLink.text,
-              let descriptionMovie = descriptionLabel.text
-        else { return }
+        guard let imageMovie = addImageView.image?.jpegData(compressionQuality: 1.0), let nameMovie = nameLabel.text, !nameMovie.isEmpty, let ratingMovie = ratingValueLabel.text, !ratingMovie.isEmpty, let releaseDateMovie = releaseDateLabel.text, !releaseDateMovie.isEmpty, let youTubeLinkMovie = youtubeLink.text, !youTubeLinkMovie.isEmpty, let descriptionMovie = descriptionLabel.text, !descriptionMovie.isEmpty else { return }
+        
         viewModel.saveNewMovie(imageMovie: imageMovie, nameMovie: nameMovie, ratingMovie: ratingMovie, releaseDateMovie: releaseDateMovie, youTubeLinkMovie: youTubeLinkMovie, descriptionMovie: descriptionMovie)
     }
 }

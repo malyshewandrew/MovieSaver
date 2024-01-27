@@ -37,8 +37,7 @@ final class CoreDataManager {
             return .failure(.error("Could not save. \(error)"))
         }
     }
-
-
+    
     // MARK: - GET MOVIES:
 
     func getMovies() -> Result<[Movie], CoreDataError> {

@@ -20,7 +20,7 @@ protocol AddMovieViewModel {
     var transitionYoutubeScreenView: ((DefaultYoutubeScreenView) -> Void)? { get set }
     
     func saveNewMovie(imageMovie: Data?, nameMovie: String?, ratingMovie: String?, releaseDateMovie: String?, youTubeLinkMovie: String?, descriptionMovie: String?)
-    var saveNewFilmClosure: ((UIAlertController) -> Void)? { get set }
+    var saveNewMovieClosure: ((UIAlertController) -> Void)? { get set }
 }
 
 final class DefaultAddMoviewViewModel: AddMovieViewModel {
@@ -97,14 +97,9 @@ final class DefaultAddMoviewViewModel: AddMovieViewModel {
         setupUIImagePicker?(imagePicker)
     }
     
+    var saveNewMovieClosure: ((UIAlertController) -> Void)?
+    
     func saveNewMovie(imageMovie: Data?, nameMovie: String?, ratingMovie: String?, releaseDateMovie: String?, youTubeLinkMovie: String?, descriptionMovie: String?) {
-        let alertSuccess = UIAlertController(title: "Сообщение", message: "Фильм добавлен", preferredStyle: .alert)
-        alertSuccess.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
-        }))
-        
-        let alertError = UIAlertController(title: "Сообщение", message: "Ошибка", preferredStyle: .alert)
-        alertSuccess.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: { _ in
-        }))
 
         guard let imageMovie = imageMovie,
               let nameMovie = nameMovie,
@@ -118,8 +113,19 @@ final class DefaultAddMoviewViewModel: AddMovieViewModel {
 
         let result = CoreDataManager.instance.saveMovie(imageMovie: imageMovie, nameMovie: nameMovie, ratingMovie: ratingMovie, releaseDateMovie: releaseDateMovie, youTubeLinkMovie: youTubeLinkMovie, descriptionMovie: descriptionMovie)
         
-        saveNewFilmClosure?(alertSuccess)
+        switch result {
+        case .success:
+            print("Saved")
+            let alertSuccess = UIAlertController(title: "Сообщение", message: "Фильм добавлен", preferredStyle: .alert)
+            alertSuccess.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+            }))
+            saveNewMovieClosure?(alertSuccess)
+        case .failure(let failure):
+            print(failure)
+            let alertError = UIAlertController(title: "Ошибка", message: "Произошла ошибка", preferredStyle: .alert)
+            alertError.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: { _ in
+            }))
+            saveNewMovieClosure?(alertError)
+        }
     }
-    
-    var saveNewFilmClosure: ((UIAlertController) -> Void)?
 }

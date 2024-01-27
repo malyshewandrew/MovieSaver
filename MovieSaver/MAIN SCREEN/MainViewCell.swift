@@ -80,12 +80,8 @@ final class MainViewCell: UITableViewCell {
         containerView.layer.shadowOpacity = 0.10
         
         // MARK: MOVIE IMAGE:
-
-//        movieImage.backgroundColor = .systemBlue
         
         // MARK: INFO VIEW:
-
-//        infoView.backgroundColor = .systemGreen
         
         // MARK: NAME LABEL:
 
@@ -108,7 +104,6 @@ final class MainViewCell: UITableViewCell {
 
             self.movieImage.image = UIImage(named: "default_image")
         }
-
         nameLabel.text = movie.nameMovie
         ratingLabel.text = movie.ratingMovie
     }
