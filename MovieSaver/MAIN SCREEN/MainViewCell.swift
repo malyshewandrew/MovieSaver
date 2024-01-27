@@ -81,31 +81,35 @@ final class MainViewCell: UITableViewCell {
         
         // MARK: MOVIE IMAGE:
 
-        movieImage.backgroundColor = .systemBlue
+//        movieImage.backgroundColor = .systemBlue
         
         // MARK: INFO VIEW:
 
-        infoView.backgroundColor = .systemGreen
+//        infoView.backgroundColor = .systemGreen
         
         // MARK: NAME LABEL:
 
-        nameLabel.text = "Spider Man No Way Home"
         nameLabel.numberOfLines = 0
         nameLabel.font = UIFont(name: "manrope-thin", size: 18)
         nameLabel.textAlignment = .center
         
         // MARK: RATING LABEL:
 
-        ratingLabel.text = "8.9/10"
         ratingLabel.font = UIFont(name: "manrope-thin", size: 18)
         ratingLabel.textAlignment = .center
     }
     
     // MARK: CONFIGURE ENTITY:
 
-//    func configureEntity(movie: Movie) {
-//        movieImage.image = movie.imageMovie
-//        nameLabel.text = movie.nameMovie
-//        ratingLabel.text = movie.ratingMovie
-//    }
+    func configureEntity(movie: Movie) {
+        if let imageData = movie.imageMovie, let movieImage = UIImage(data: imageData) {
+            self.movieImage.image = movieImage
+        } else {
+
+            self.movieImage.image = UIImage(named: "default_image")
+        }
+
+        nameLabel.text = movie.nameMovie
+        ratingLabel.text = movie.ratingMovie
+    }
 }

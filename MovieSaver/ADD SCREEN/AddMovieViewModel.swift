@@ -1,5 +1,5 @@
-import UIKit
 import PhotosUI
+import UIKit
 
 protocol AddMovieViewModel {
     func tapOnALertButton()
@@ -18,6 +18,9 @@ protocol AddMovieViewModel {
     var transitionRatingScreenView: ((DefaultRatingScreenView) -> Void)? { get set }
     var transitionReleaseScreenView: ((DefaultReleaseScreenView) -> Void)? { get set }
     var transitionYoutubeScreenView: ((DefaultYoutubeScreenView) -> Void)? { get set }
+    
+    func saveNewMovie(imageMovie: Data?, nameMovie: String?, ratingMovie: String?, releaseDateMovie: String?, youTubeLinkMovie: String?, descriptionMovie: String?)
+    var saveNewFilmClosure: ((UIAlertController) -> Void)? { get set }
 }
 
 final class DefaultAddMoviewViewModel: AddMovieViewModel {
@@ -93,4 +96,30 @@ final class DefaultAddMoviewViewModel: AddMovieViewModel {
         }
         setupUIImagePicker?(imagePicker)
     }
+    
+    func saveNewMovie(imageMovie: Data?, nameMovie: String?, ratingMovie: String?, releaseDateMovie: String?, youTubeLinkMovie: String?, descriptionMovie: String?) {
+        let alertSuccess = UIAlertController(title: "Сообщение", message: "Фильм добавлен", preferredStyle: .alert)
+        alertSuccess.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+        }))
+        
+        let alertError = UIAlertController(title: "Сообщение", message: "Ошибка", preferredStyle: .alert)
+        alertSuccess.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: { _ in
+        }))
+
+        guard let imageMovie = imageMovie,
+              let nameMovie = nameMovie,
+              let ratingMovie = ratingMovie,
+              let releaseDateMovie = releaseDateMovie,
+              let youTubeLinkMovie = youTubeLinkMovie,
+              let descriptionMovie = descriptionMovie
+        else {
+            return
+        }
+
+        let result = CoreDataManager.instance.saveMovie(imageMovie: imageMovie, nameMovie: nameMovie, ratingMovie: ratingMovie, releaseDateMovie: releaseDateMovie, youTubeLinkMovie: youTubeLinkMovie, descriptionMovie: descriptionMovie)
+        
+        saveNewFilmClosure?(alertSuccess)
+    }
+    
+    var saveNewFilmClosure: ((UIAlertController) -> Void)?
 }

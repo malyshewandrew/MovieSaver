@@ -1,14 +1,14 @@
 import UIKit
 
 protocol NameScreenView {
-    func setName(string: String)
-    var setNameCLosure: ((String) -> Void)? { get set }
+    func setName(name: String)
+    var setNameClosure: ((String) -> Void)? { get set }
 }
 
 final class NameScreenViewModel: NameScreenView {
-    var setNameCLosure: ((String) -> Void)?
+    var setNameClosure: ((String) -> Void)?
     
-    func setName(string: String) {
-        setNameCLosure?(string)
+    func setName(name: String) {
+        setNameClosure?(name)
     }
 }

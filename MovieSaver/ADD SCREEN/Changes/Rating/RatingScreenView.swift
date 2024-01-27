@@ -64,13 +64,34 @@ final class DefaultRatingScreenView: UIViewController {
         yourRatingLabel.text = "Your Rating"
         yourRatingLabel.textColor = .black
         yourRatingLabel.textAlignment = .center
-        
-        // MARK: PICKER VIEW:
 
         // MARK: SAVE BUTTON:
         
         saveButton.setTitle("Save", for: .normal)
         saveButton.setTitleColor(.systemBlue, for: .normal)
+        saveButton.addTarget(self, action: #selector(tapOnSaveButton), for: .touchUpInside)
+    }
+    
+    // MARK: - CONFIGURE BINDINGS:
+    
+    private func configureBindings() {
+        viewModel.setRatingClosure = { [weak self] rating in
+            self?.yourRatingLabel.text = rating
+        }
+    }
+    
+    // MARK: - HELPERS:
+
+    private func getRating() -> String? {
+        let rating = pickerView.selectedRow(inComponent: 0)
+        return String(rating)
+    }
+    
+    @objc func tapOnSaveButton() {
+        if let rating = getRating() {
+            viewModel.setRating(rating: rating)
+            navigationController?.popViewController(animated: true)
+        }
     }
 }
 

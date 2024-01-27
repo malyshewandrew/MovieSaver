@@ -4,10 +4,12 @@ final class DefaultReleaseScreenView: UIViewController {
     // MARK: - PROPERTIES:
     
     var viewModel: ReleaseScreenViewModel!
-
     private let releaseDateLabel = UILabel()
     private let datePicker = UIDatePicker()
+    private var datePickerTextField = UITextField()
     private let saveButton = UIButton()
+    
+    // MARK: - LIFECYCLE:
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +64,8 @@ final class DefaultReleaseScreenView: UIViewController {
         releaseDateLabel.textAlignment = .center
         
         // MARK: PICKER VIEW:
+        
+        datePickerTextField.inputView = datePicker
         datePicker.datePickerMode = .date
         datePicker.maximumDate = Date()
         datePicker.preferredDatePickerStyle = .wheels
@@ -70,8 +74,30 @@ final class DefaultReleaseScreenView: UIViewController {
         
         saveButton.setTitle("Save", for: .normal)
         saveButton.setTitleColor(.systemBlue, for: .normal)
+        saveButton.addTarget(self, action: #selector(tapOnSaveButton), for: .touchUpInside)
+    }
+    
+    // MARK: - CONFIGURE BINDINGS:
+    
+    private func configureBindings() {
+        viewModel.setReleaseClosure = { [weak self] release in
+            self?.datePickerTextField.text = release
+        }
+    }
+    
+    // MARK: - HELPERS:
+    
+    private func getRelease() -> String? {
+        let release = datePicker.date
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+        return dateFormatter.string(from: release)
+    }
+    
+    @objc func tapOnSaveButton() {
+        if let release = getRelease() {
+            viewModel.setRelease(release: release)
+            navigationController?.popViewController(animated: true)
+        }
     }
 }
-
-// MARK: EXTENSION:
-

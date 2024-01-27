@@ -85,13 +85,17 @@ final class DefaultNameScreenView: UIViewController {
         saveButton.setTitleColor(.systemBlue, for: .normal)
         saveButton.addTarget(self, action: #selector(tapOnSave), for: .touchUpInside)
     }
-
+    
+    // MARK: - CONFIGURE BINDINGS:
+    
     private func configureBingings() {
-        viewModel.setNameCLosure = { [weak self] name in
+        viewModel.setNameClosure = { [weak self] name in
             self?.textField.text = name
         }
     }
     
+    // MARK: - HELPERS:
+
     private func getText() -> String? {
         let text = self.textField.text
         return text
@@ -99,7 +103,8 @@ final class DefaultNameScreenView: UIViewController {
 
     @objc func tapOnSave() {
         if let name = getText() {
-            viewModel.setName(string: name)
+            viewModel.setName(name: name)
+            navigationController?.popViewController(animated: true)
         }
     }
 }

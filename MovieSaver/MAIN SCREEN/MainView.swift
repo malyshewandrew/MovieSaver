@@ -104,7 +104,23 @@ extension DefaultMainView: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainViewCell", for: indexPath) as? MainViewCell else { return UITableViewCell() }
-        let _ = movies[indexPath.row]
+        let movie = movies[indexPath.row]
+        cell.configureEntity(movie: movie)
         return cell
+    }
+    
+    // MARK: DELETE CAR:
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let movie = movies[indexPath.row]
+        if editingStyle == .delete {
+            let alertDelete = UIAlertController(title: "Delete", message: "Delete this movie?", preferredStyle: .alert)
+            alertDelete.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+            alertDelete.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                _ = CoreDataManager.instance.deleteMovie(movie)
+                self.viewModel.loadMovies()
+            }))
+            present(alertDelete, animated: true)
+        }
     }
 }

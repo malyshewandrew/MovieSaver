@@ -39,7 +39,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         configureUI()
         configureBindigs()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
@@ -135,7 +135,9 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         // MARK: NAVIGATION CONTROLLER:
 
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .save, target: nil, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .save, primaryAction: UIAction(handler: { [weak self] _ in
+            self?.saveMovie()
+        }))
         navigationItem.backButtonTitle = ""
 
         // MARK: IMAGE VIEW:
@@ -242,62 +244,77 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         // MARK: TEXT VIEW:
 
         textView.text = "Description"
+        textView.backgroundColor = .clear
     }
-    
+
     // MARK: TRANSITIONS:
+
     @objc func tapOnNameChangeButton() {
         viewModel.transitionNameScreen()
     }
-    
+
     @objc func tapOnRatingChangeButton() {
         viewModel.transitionRatingScreen()
     }
-    
+
     @objc func tapOnReleaseChangeButton() {
         viewModel.transitionReleaseScreen()
     }
-    
+
     @objc func tapOnYoutubeChangeButton() {
         viewModel.transitionYoutubeScreen()
     }
-    
+
     // MARK: - CONFIGURE BINDINGS:
 
     private func configureBindigs() {
         viewModel.setupAlert = { [weak self] alert in
             self?.present(alert, animated: true)
         }
-        
+
         viewModel.setupPHPicker = { [weak self] picker in
             picker.delegate = self
             self?.present(picker, animated: true)
         }
-        
+
         viewModel.setupUIImagePicker = { [weak self] imagePicker in
             imagePicker.delegate = self
             self?.present(imagePicker, animated: true, completion: nil)
         }
-        
+
         viewModel.transitionNameScreenView = { [weak self] nameScreenView in
             self?.navigationController?.pushViewController(nameScreenView, animated: true)
-            nameScreenView.viewModel.setNameCLosure = { [weak self] name in
+            nameScreenView.viewModel.setNameClosure = { [weak self] name in
                 self?.nameLabel.text = name
             }
         }
-        
+
         viewModel.transitionRatingScreenView = { [weak self] ratingScreenView in
             self?.navigationController?.pushViewController(ratingScreenView, animated: true)
+            ratingScreenView.viewModel.setRatingClosure = { [weak self] rating in
+                self?.ratingValueLabel.text = rating
+            }
         }
-        
+
         viewModel.transitionReleaseScreenView = { [weak self] releaseScreenView in
             self?.navigationController?.pushViewController(releaseScreenView, animated: true)
+            releaseScreenView.viewModel.setReleaseClosure = { [weak self] release in
+                self?.releaseDateLabel.text = release
+            }
         }
-        
+
         viewModel.transitionYoutubeScreenView = { [weak self] youScreenView in
             self?.navigationController?.pushViewController(youScreenView, animated: true)
+            youScreenView.viewModel.setYoutubeClosure = { [weak self] youtube in
+                self?.youtubeLink.text = youtube
+            }
+        }
+        
+        viewModel.saveNewFilmClosure = { [weak self] alert in
+            self?.present(alert, animated: true)
         }
     }
-    
+
     // MARK: - ALERT BUTTON:
 
     @objc func tapOnAlertButton() {
@@ -315,7 +332,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
     @objc func openCamera() {
         viewModel.openCamera()
     }
-    
+
     private func setupImage(image: UIImage?) {
         if let image = image {
             DispatchQueue.main.async {
@@ -324,8 +341,20 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
             }
         }
     }
-}
 
+    // MARK: - SAVE NEW MOVIE:
+
+    private func saveMovie() {
+        guard let imageMovie = addImageView.image?.jpegData(compressionQuality: 1.0),
+              let nameMovie = nameLabel.text,
+              let ratingMovie = ratingValueLabel.text,
+              let releaseDateMovie = releaseDateLabel.text,
+              let youTubeLinkMovie = youtubeLink.text,
+              let descriptionMovie = descriptionLabel.text
+        else { return }
+        viewModel.saveNewMovie(imageMovie: imageMovie, nameMovie: nameMovie, ratingMovie: ratingMovie, releaseDateMovie: releaseDateMovie, youTubeLinkMovie: youTubeLinkMovie, descriptionMovie: descriptionMovie)
+    }
+}
 
 // MARK: - EXTENSION:
 

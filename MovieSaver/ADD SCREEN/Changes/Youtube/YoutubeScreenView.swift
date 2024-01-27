@@ -83,5 +83,28 @@ final class DefaultYoutubeScreenView: UIViewController {
 
         saveButton.setTitle("Save", for: .normal)
         saveButton.setTitleColor(.systemBlue, for: .normal)
+        saveButton.addTarget(self, action: #selector(tapOnSave), for: .touchUpInside)
+    }
+    
+    // MARK: - CONFIGURE BINDINGS:
+    
+    private func configureBingings() {
+        viewModel.setYoutubeClosure = { [weak self] youtube in
+            self?.textField.text = youtube
+        }
+    }
+    
+    // MARK: - HELPERS:
+
+    private func getText() -> String? {
+        let text = self.textField.text
+        return text
+    }
+
+    @objc func tapOnSave() {
+        if let youtube = getText() {
+            viewModel.setYoutube(youtube: youtube)
+            navigationController?.popViewController(animated: true)
+        }
     }
 }
