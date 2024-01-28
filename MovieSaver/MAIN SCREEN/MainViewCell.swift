@@ -86,7 +86,7 @@ final class MainViewCell: UITableViewCell {
         // MARK: NAME LABEL:
 
         nameLabel.numberOfLines = 0
-        nameLabel.font = UIFont(name: "manrope-thin", size: 18)
+        nameLabel.font = UIFont(name: "manrope-regular", size: 18)
         nameLabel.textAlignment = .center
         
         // MARK: RATING LABEL:

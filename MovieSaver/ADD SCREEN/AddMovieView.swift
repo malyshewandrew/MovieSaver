@@ -30,7 +30,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
     private let youtubeChangeButton = UIButton()
 
     private let descriptionLabel = UILabel()
-    private let textView = UITextView()
+    private let descriptionTextView = UITextView()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,7 +47,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
     // MARK: - ADD SUBVIEWS:
 
     private func addSubviews() {
-        view.addSubviews(addImageView, addImageButton, nameStackView, ratingStackView, releaseStackView, youtubeStackView, descriptionLabel, textView)
+        view.addSubviews(addImageView, addImageButton, nameStackView, ratingStackView, releaseStackView, youtubeStackView, descriptionLabel, descriptionTextView)
         nameStackView.addArrangedSubviews(nameTitleLabel, nameLabel, nameChangeButton)
         ratingStackView.addArrangedSubviews(ratingLabel, ratingValueLabel, ratingChangeButton)
         releaseStackView.addArrangedSubviews(releaseLabel, releaseDateLabel, releaseChangeButton)
@@ -114,11 +114,11 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
 
         // MARK: TEXT VIEW:
 
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        textView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 11).isActive = true
-        textView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32).isActive = true
-        textView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
-        textView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -47).isActive = true
+        descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
+        descriptionTextView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 11).isActive = true
+        descriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32).isActive = true
+        descriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
+        descriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -47).isActive = true
     }
 
     // MARK: - CONFIGURE UI:
@@ -243,8 +243,8 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
 
         // MARK: TEXT VIEW:
 
-        textView.text = "Description"
-        textView.backgroundColor = .clear
+        descriptionTextView.text = "Description"
+        descriptionTextView.backgroundColor = .clear
     }
 
     // MARK: TRANSITIONS:
@@ -345,7 +345,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
     // MARK: - SAVE NEW MOVIE:
 
     private func saveMovie() {
-        guard let imageMovie = addImageView.image?.jpegData(compressionQuality: 1.0), let nameMovie = nameLabel.text, !nameMovie.isEmpty, let ratingMovie = ratingValueLabel.text, !ratingMovie.isEmpty, let releaseDateMovie = releaseDateLabel.text, !releaseDateMovie.isEmpty, let youTubeLinkMovie = youtubeLink.text, !youTubeLinkMovie.isEmpty, let descriptionMovie = descriptionLabel.text, !descriptionMovie.isEmpty else { return }
+        guard let imageMovie = addImageView.image?.jpegData(compressionQuality: 1.0), let nameMovie = nameLabel.text, !nameMovie.isEmpty, let ratingMovie = ratingValueLabel.text, !ratingMovie.isEmpty, let releaseDateMovie = releaseDateLabel.text, !releaseDateMovie.isEmpty, let youTubeLinkMovie = youtubeLink.text, !youTubeLinkMovie.isEmpty, let descriptionMovie = descriptionTextView.text, !descriptionMovie.isEmpty else { return }
         
         viewModel.saveNewMovie(imageMovie: imageMovie, nameMovie: nameMovie, ratingMovie: ratingMovie, releaseDateMovie: releaseDateMovie, youTubeLinkMovie: youTubeLinkMovie, descriptionMovie: descriptionMovie)
     }

@@ -34,6 +34,8 @@
 		FBC4F32C2B5AA23400D8E98A /* manrope-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FBC4F3262B5AA23400D8E98A /* manrope-bold.ttf */; };
 		FBC4F32D2B5AA23400D8E98A /* manrope-semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FBC4F3272B5AA23400D8E98A /* manrope-semibold.ttf */; };
 		FBC4F32E2B5AA23400D8E98A /* manrope-regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FBC4F3282B5AA23400D8E98A /* manrope-regular.ttf */; };
+		FBE5F78A2B66BF0A004B00D6 /* FullMovieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE5F7892B66BF0A004B00D6 /* FullMovieView.swift */; };
+		FBE5F78C2B66BF24004B00D6 /* FullMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBE5F78B2B66BF24004B00D6 /* FullMovieViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,6 +68,8 @@
 		FBC4F3262B5AA23400D8E98A /* manrope-bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "manrope-bold.ttf"; sourceTree = "<group>"; };
 		FBC4F3272B5AA23400D8E98A /* manrope-semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "manrope-semibold.ttf"; sourceTree = "<group>"; };
 		FBC4F3282B5AA23400D8E98A /* manrope-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "manrope-regular.ttf"; sourceTree = "<group>"; };
+		FBE5F7892B66BF0A004B00D6 /* FullMovieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullMovieView.swift; sourceTree = "<group>"; };
+		FBE5F78B2B66BF24004B00D6 /* FullMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullMovieViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,8 +151,8 @@
 		FB87D1F92B5ABF3C00541723 /* CORE DATA */ = {
 			isa = PBXGroup;
 			children = (
-				FB942B832B5A7B99004DC167 /* MovieSaver.xcdatamodeld */,
 				FB87D1F62B5AAC0C00541723 /* CoreDataManager.swift */,
+				FB942B832B5A7B99004DC167 /* MovieSaver.xcdatamodeld */,
 			);
 			path = "CORE DATA";
 			sourceTree = "<group>";
@@ -195,6 +199,7 @@
 			children = (
 				FB87D1FA2B5ABF7600541723 /* APPLICATION */,
 				FB1BE2A52B5A7F8E00EE9350 /* MAIN SCREEN */,
+				FBE5F7882B66BEE7004B00D6 /* FULL MOVIE */,
 				FB87D1FB2B5B0D9900541723 /* ADD SCREEN */,
 				FB87D1F92B5ABF3C00541723 /* CORE DATA */,
 				FB87D1F82B5ABF2A00541723 /* EXTENSIONS */,
@@ -216,6 +221,15 @@
 				FBC4F3242B5AA23400D8E98A /* manrope-thin.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		FBE5F7882B66BEE7004B00D6 /* FULL MOVIE */ = {
+			isa = PBXGroup;
+			children = (
+				FBE5F7892B66BF0A004B00D6 /* FullMovieView.swift */,
+				FBE5F78B2B66BF24004B00D6 /* FullMovieViewModel.swift */,
+			);
+			path = "FULL MOVIE";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -308,8 +322,10 @@
 				FB87D1F72B5AAC0C00541723 /* CoreDataManager.swift in Sources */,
 				FB87D1FF2B5B0DD700541723 /* AddMovieViewModel.swift in Sources */,
 				FB173E082B5EB5CF004DF7B1 /* NameScreenView.swift in Sources */,
+				FBE5F78C2B66BF24004B00D6 /* FullMovieViewModel.swift in Sources */,
 				FB173E042B5EB42B004DF7B1 /* ReleaseScreenView.swift in Sources */,
 				FB173E0C2B5EB974004DF7B1 /* YoutubeScreenView.swift in Sources */,
+				FBE5F78A2B66BF0A004B00D6 /* FullMovieView.swift in Sources */,
 				FB942B7B2B5A7B99004DC167 /* AppDelegate.swift in Sources */,
 				FB942B7D2B5A7B99004DC167 /* SceneDelegate.swift in Sources */,
 				FB173E022B5EA90C004DF7B1 /* RatingScreenViewModel.swift in Sources */,
