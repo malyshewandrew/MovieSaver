@@ -8,6 +8,7 @@ final class DefaulFullMovieView: UIViewController {
     private let infoView = UIView()
     private let movieNameLabel = UILabel()
     private let ratingMovieLabel = UILabel()
+    private let defaultRatingMovieLabel = UILabel()
     private let releaseDateLabel = UILabel()
     private let descriptionTextView = UITextView()
     private let descriptionLabel = UILabel()
@@ -27,7 +28,7 @@ final class DefaulFullMovieView: UIViewController {
 
     private func addSubviews() {
         view.addSubviews(imageView, infoView)
-        infoView.addSubviews(movieNameLabel, starImageView, ratingMovieLabel, releaseDateLabel, descriptionTextView, youtubeWebView)
+        infoView.addSubviews(movieNameLabel, starImageView, ratingMovieLabel, defaultRatingMovieLabel, releaseDateLabel, descriptionTextView, youtubeWebView)
     }
 
     // MARK: - CONFIGURE CONSTRAINTS:
@@ -69,14 +70,21 @@ final class DefaulFullMovieView: UIViewController {
 
         ratingMovieLabel.translatesAutoresizingMaskIntoConstraints = false
         ratingMovieLabel.topAnchor.constraint(equalTo: movieNameLabel.bottomAnchor, constant: 14).isActive = true
-        ratingMovieLabel.leadingAnchor.constraint(equalTo: starImageView.trailingAnchor, constant: 5).isActive = true
+        ratingMovieLabel.leadingAnchor.constraint(equalTo: starImageView.trailingAnchor, constant: 8).isActive = true
         ratingMovieLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
+
+        // MARK: DEFAULT RATING LABEL:
+
+        defaultRatingMovieLabel.translatesAutoresizingMaskIntoConstraints = false
+        defaultRatingMovieLabel.topAnchor.constraint(equalTo: movieNameLabel.bottomAnchor, constant: 14).isActive = true
+        defaultRatingMovieLabel.leadingAnchor.constraint(equalTo: ratingMovieLabel.trailingAnchor, constant: 2).isActive = true
+        defaultRatingMovieLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
 
         // MARK: RELEASE DATE LABEL:
 
         releaseDateLabel.translatesAutoresizingMaskIntoConstraints = false
         releaseDateLabel.topAnchor.constraint(equalTo: movieNameLabel.bottomAnchor, constant: 14).isActive = true
-        releaseDateLabel.leadingAnchor.constraint(equalTo: ratingMovieLabel.trailingAnchor, constant: 5).isActive = true
+        releaseDateLabel.leadingAnchor.constraint(equalTo: defaultRatingMovieLabel.trailingAnchor, constant: 8).isActive = true
         releaseDateLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
 
         // MARK: TEXT VIEW:
@@ -118,22 +126,26 @@ final class DefaulFullMovieView: UIViewController {
         movieNameLabel.backgroundColor = .backgroundAddScreen
         movieNameLabel.font = UIFont(name: "manrope-regular", size: 18)
         movieNameLabel.numberOfLines = 0
-        
+
         // MARK: STAR IMAGE:
 
         starImageView.image = UIImage(systemName: "star.fill")
         starImageView.tintColor = .systemYellow
 
-        // MARK: RATING MOVIE LABE:
+        // MARK: RATING MOVIE LABEL:
 
         ratingMovieLabel.backgroundColor = .backgroundAddScreen
         
+        // MARK: DEFAULT RATING LABEL:
+
+        defaultRatingMovieLabel.text = "/10"
+        defaultRatingMovieLabel.textColor = .gray
+
         // MARK: RELEASE DATE:
+
         releaseDateLabel.textColor = .gray
 
         // MARK: TEXT VIEW:
-
-
 
         // MARK: WEB VIEW:
     }
