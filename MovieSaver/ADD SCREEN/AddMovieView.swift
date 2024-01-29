@@ -26,7 +26,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
 
     private let youtubeStackView = UIStackView()
     private let youtubeLabel = UILabel()
-    private let youtubeLink = UILabel()
+    private let youtubeLinkLabel = UILabel()
     private let youtubeChangeButton = UIButton()
 
     private let descriptionLabel = UILabel()
@@ -54,7 +54,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         nameStackView.addArrangedSubviews(nameTitleLabel, nameLabel, nameChangeButton)
         ratingStackView.addArrangedSubviews(ratingLabel, ratingValueLabel, ratingChangeButton)
         releaseStackView.addArrangedSubviews(releaseLabel, releaseDateLabel, releaseChangeButton)
-        youtubeStackView.addArrangedSubviews(youtubeLabel, youtubeLink, youtubeChangeButton)
+        youtubeStackView.addArrangedSubviews(youtubeLabel, youtubeLinkLabel, youtubeChangeButton)
     }
 
     // MARK: - CONFIGURE CONSTRAINTS:
@@ -163,12 +163,13 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         // MARK: TITLE NAME LABEL:
 
         nameTitleLabel.text = "Name"
-        nameTitleLabel.textColor = .black
+        nameTitleLabel.textColor = .colorLinks
 
         // MARK: NAME LABEL:
 
         nameLabel.text = "-"
-        nameLabel.textColor = .black
+        nameLabel.textColor = .colorLinks
+        nameLabel.font = UIFont(name: "manrope-bold", size: 18)
 
         // MARK: NAME CHANGE BUTTON:
 
@@ -184,13 +185,14 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         // MARK: RATING LABEL:
 
         ratingLabel.text = "Your Rating"
-        ratingLabel.textColor = .black
+        ratingLabel.textColor = .colorLinks
         ratingLabel.font = UIFont(name: "manrope-regular", size: 18)
 
         // MARK: RATING VALUES:
 
         ratingValueLabel.text = "-"
-        ratingValueLabel.textColor = .black
+        ratingValueLabel.textColor = .colorLinks
+        ratingValueLabel.font = UIFont(name: "manrope-bold", size: 18)
 
         // MARK: RATING CHANGE BUTTON:
 
@@ -206,13 +208,14 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         // MARK: RELEASE LABEL:
 
         releaseLabel.text = "Release Date"
-        releaseLabel.textColor = .black
+        releaseLabel.textColor = .colorLinks
         releaseLabel.font = UIFont(name: "manrope-regular", size: 18)
 
         // MARK: RELEASE DATE LABEL:
 
         releaseDateLabel.text = "-"
-        releaseDateLabel.textColor = .black
+        releaseDateLabel.textColor = .colorLinks
+        releaseDateLabel.font = UIFont(name: "manrope-bold", size: 18)
 
         // MARK: RELEASE CHANGE BUTTON:
 
@@ -228,13 +231,14 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         // MARK: YOUTUBE LABEL:
 
         youtubeLabel.text = "YouTube Link"
-        youtubeLabel.textColor = .black
+        youtubeLabel.textColor = .colorLinks
         youtubeLabel.font = UIFont(name: "manrope-regular", size: 18)
 
         // MARK: YOUTUBE LINK:
 
-        youtubeLink.text = "-"
-        youtubeLink.textColor = .black
+        youtubeLinkLabel.text = "-"
+        youtubeLinkLabel.textColor = .colorLinks
+        youtubeLinkLabel.font = UIFont(name: "manrope-bold", size: 18)
 
         // MARK: YOUTUBE CHANGE BUTTON:
 
@@ -253,6 +257,8 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         descriptionTextView.text = ""
         descriptionTextView.backgroundColor = .clear
         descriptionTextView.font = UIFont(name: "manrope-light", size: 14)
+        descriptionTextView.layer.borderWidth = 1
+        descriptionTextView.layer.borderColor = UIColor.gray.cgColor
     }
 
     // MARK: - NOTIFICATION CENTER:
@@ -351,12 +357,15 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         viewModel.transitionYoutubeScreenView = { [weak self] youScreenView in
             self?.navigationController?.pushViewController(youScreenView, animated: true)
             youScreenView.viewModel.setYoutubeClosure = { [weak self] youtube in
-                self?.youtubeLink.text = youtube
+                self?.youtubeLinkLabel.text = youtube
             }
         }
 
         viewModel.saveNewMovieClosure = { [weak self] alert in
             self?.present(alert, animated: true)
+            self?.viewModel.popTransition = { [weak self] in
+                self?.navigationController?.popViewController(animated: true)
+            }
         }
     }
 
@@ -390,7 +399,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
     // MARK: - SAVE NEW MOVIE:
 
     private func saveMovie() {
-        guard let imageMovie = addImageView.image?.jpegData(compressionQuality: 1.0), let nameMovie = nameLabel.text, let ratingMovie = ratingValueLabel.text, let releaseDateMovie = releaseDateLabel.text, let youTubeLinkMovie = youtubeLink.text, let descriptionMovie = descriptionTextView.text else { return }
+        guard let imageMovie = addImageView.image?.jpegData(compressionQuality: 1.0), let nameMovie = nameLabel.text, let ratingMovie = ratingValueLabel.text, let releaseDateMovie = releaseDateLabel.text, let youTubeLinkMovie = youtubeLinkLabel.text, let descriptionMovie = descriptionTextView.text else { return }
 
         viewModel.saveNewMovie(imageMovie: imageMovie, nameMovie: nameMovie, ratingMovie: ratingMovie, releaseDateMovie: releaseDateMovie, youTubeLinkMovie: youTubeLinkMovie, descriptionMovie: descriptionMovie)
     }

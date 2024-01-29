@@ -8,6 +8,7 @@ protocol AddMovieViewModel {
     var setupAlert: ((UIAlertController) -> Void)? { get set }
     var setupPHPicker: ((PHPickerViewController) -> Void)? { get set }
     var setupUIImagePicker: ((UIImagePickerController) -> Void)? { get set }
+    var popTransition: (() -> Void)? { get set }
     
     func transitionNameScreen()
     func transitionRatingScreen()
@@ -24,6 +25,8 @@ protocol AddMovieViewModel {
 }
 
 final class DefaultAddMoviewViewModel: AddMovieViewModel {
+    var popTransition: (() -> Void)?
+    
     var transitionRatingScreenView: ((DefaultRatingScreenView) -> Void)?
     
     var transitionReleaseScreenView: ((DefaultReleaseScreenView) -> Void)?
@@ -68,13 +71,13 @@ final class DefaultAddMoviewViewModel: AddMovieViewModel {
     
     func tapOnALertButton() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Камера", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
             self.openCamera()
         }))
-        alert.addAction(UIAlertAction(title: "Галерея", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Galery", style: .default, handler: { _ in
             self.openGalery()
         }))
-        alert.addAction(UIAlertAction(title: "Отмена", style: .cancel, handler: { _ in
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { _ in
         }))
         setupAlert?(alert)
     }
@@ -107,7 +110,7 @@ final class DefaultAddMoviewViewModel: AddMovieViewModel {
               let youTubeLinkMovie = youTubeLinkMovie, youTubeLinkMovie != "-",
               let descriptionMovie = descriptionMovie, descriptionMovie != ""
         else {
-            let alertEmpty = UIAlertController(title: "Ошибка", message: "Заполните все поля", preferredStyle: .alert)
+            let alertEmpty = UIAlertController(title: "Error", message: "Fill in all the fields", preferredStyle: .alert)
             alertEmpty.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: { _ in
             }))
             saveNewMovieClosure?(alertEmpty)
@@ -119,13 +122,14 @@ final class DefaultAddMoviewViewModel: AddMovieViewModel {
         switch result {
         case .success:
             print("Saved")
-            let alertSuccess = UIAlertController(title: "Сообщение", message: "Фильм добавлен", preferredStyle: .alert)
+            let alertSuccess = UIAlertController(title: "Done", message: "The movie has been added", preferredStyle: .alert)
             alertSuccess.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+                self.popTransition?()
             }))
             saveNewMovieClosure?(alertSuccess)
         case .failure(let failure):
             print(failure)
-            let alertError = UIAlertController(title: "Ошибка", message: "Произошла ошибка", preferredStyle: .alert)
+            let alertError = UIAlertController(title: "Error", message: "An error has occurred", preferredStyle: .alert)
             alertError.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: { _ in
             }))
             saveNewMovieClosure?(alertError)

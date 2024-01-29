@@ -52,7 +52,7 @@ final class DefaultMainView: UIViewController {
 
         termsButton.translatesAutoresizingMaskIntoConstraints = false
         termsButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
-        termsButton.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: -50).isActive = true
+        termsButton.trailingAnchor.constraint(equalTo: webButton.leadingAnchor, constant: -10).isActive = true
         termsButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
 
         // MARK: WEB:
@@ -66,7 +66,7 @@ final class DefaultMainView: UIViewController {
 
         privacyButton.translatesAutoresizingMaskIntoConstraints = false
         privacyButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
-        privacyButton.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 50).isActive = true
+        privacyButton.leadingAnchor.constraint(equalTo: webButton.trailingAnchor, constant: 10).isActive = true
         privacyButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
     }
 
@@ -95,6 +95,10 @@ final class DefaultMainView: UIViewController {
 
         // MARK: TERMS OF USE:
 
+        let attributedStringTerms = NSAttributedString(string: "TERMS OF USE", attributes: [
+            NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
+        ])
+        termsButton.setAttributedTitle(attributedStringTerms, for: .normal)
         termsButton.setTitle("TERMS OF USE", for: .normal)
         termsButton.setTitleColor(.colorLinks, for: .normal)
         termsButton.titleLabel?.font = UIFont(name: "manrope-medium", size: 8)
@@ -102,14 +106,20 @@ final class DefaultMainView: UIViewController {
 
         // MARK: WEB:
 
-        webButton.setTitle("WEB SITE", for: .normal)
+        let attributedStringWeb = NSAttributedString(string: "WEB SITE", attributes: [
+            NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
+        ])
+        webButton.setAttributedTitle(attributedStringWeb, for: .normal)
         webButton.setTitleColor(.colorLinks, for: .normal)
         webButton.titleLabel?.font = UIFont(name: "manrope-medium", size: 8)
         webButton.addTarget(self, action: #selector(webTapped), for: .touchUpInside)
 
         // MARK: PRIVACY:
 
-        privacyButton.setTitle("PRIVACY POLICY", for: .normal)
+        let attributedStringPrivacy = NSAttributedString(string: "PRIVACY POLICY", attributes: [
+            NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue
+        ])
+        privacyButton.setAttributedTitle(attributedStringPrivacy, for: .normal)
         privacyButton.setTitleColor(.colorLinks, for: .normal)
         privacyButton.titleLabel?.font = UIFont(name: "manrope-medium", size: 8)
         privacyButton.addTarget(self, action: #selector(privacyTapped), for: .touchUpInside)
