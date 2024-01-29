@@ -1,10 +1,16 @@
+import SafariServices
 import UIKit
+import WebKit
 
 final class DefaultMainView: UIViewController {
     // MARK: - PROPERTIES:
 
     var viewModel: MainViewModel!
     private var tableView = UITableView()
+    private let termsButton = UIButton()
+    private let webButton = UIButton()
+    private let privacyButton = UIButton()
+
     var movies = [Movie]() {
         didSet {
             tableView.reloadData()
@@ -30,7 +36,7 @@ final class DefaultMainView: UIViewController {
     // MARK: - ADD SUBVIEWS:
 
     private func addSubviews() {
-        view.addSubview(tableView)
+        view.addSubviews(tableView, termsButton, webButton, privacyButton)
     }
 
     // MARK: - CONFIGURE CONSTRAINTS:
@@ -40,7 +46,28 @@ final class DefaultMainView: UIViewController {
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50).isActive = true
+
+        // MARK: TERMS OF USE:
+
+        termsButton.translatesAutoresizingMaskIntoConstraints = false
+        termsButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        termsButton.trailingAnchor.constraint(equalTo: view.centerXAnchor, constant: -50).isActive = true
+        termsButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
+
+        // MARK: WEB:
+
+        webButton.translatesAutoresizingMaskIntoConstraints = false
+        webButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        webButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        webButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
+
+        // MARK: PRIVACY:
+
+        privacyButton.translatesAutoresizingMaskIntoConstraints = false
+        privacyButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        privacyButton.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: 50).isActive = true
+        privacyButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
     }
 
     // MARK: - CONFIGURE UI:
@@ -65,6 +92,48 @@ final class DefaultMainView: UIViewController {
         // MARK: TABLE VIEW:
 
         tableView.backgroundColor = .backgroundMainScreen
+
+        // MARK: TERMS OF USE:
+
+        termsButton.setTitle("TERMS OF USE", for: .normal)
+        termsButton.setTitleColor(.colorLinks, for: .normal)
+        termsButton.titleLabel?.font = UIFont(name: "manrope-medium", size: 8)
+        termsButton.addTarget(self, action: #selector(termsTapped), for: .touchUpInside)
+
+        // MARK: WEB:
+
+        webButton.setTitle("WEB SITE", for: .normal)
+        webButton.setTitleColor(.colorLinks, for: .normal)
+        webButton.titleLabel?.font = UIFont(name: "manrope-medium", size: 8)
+        webButton.addTarget(self, action: #selector(webTapped), for: .touchUpInside)
+
+        // MARK: PRIVACY:
+
+        privacyButton.setTitle("PRIVACY POLICY", for: .normal)
+        privacyButton.setTitleColor(.colorLinks, for: .normal)
+        privacyButton.titleLabel?.font = UIFont(name: "manrope-medium", size: 8)
+        privacyButton.addTarget(self, action: #selector(privacyTapped), for: .touchUpInside)
+    }
+
+    @objc func termsTapped() {
+        guard let url = URL(string: "https://moviesaver.tilda.ws/termsofuse") else { return }
+        let safariViewController = SFSafariViewController(url: url)
+        safariViewController.delegate = self
+        present(safariViewController, animated: true)
+    }
+
+    @objc func webTapped() {
+        guard let url = URL(string: "http://moviesaver.tilda.ws/") else { return }
+        let safariViewController = SFSafariViewController(url: url)
+        safariViewController.delegate = self
+        present(safariViewController, animated: true)
+    }
+
+    @objc func privacyTapped() {
+        guard let url = URL(string: "https://moviesaver.tilda.ws/privacysecurity") else { return }
+        let safariViewController = SFSafariViewController(url: url)
+        safariViewController.delegate = self
+        present(safariViewController, animated: true)
     }
 
     // MARK: - CONFIGURE TABLE VIEW:
@@ -99,22 +168,22 @@ final class DefaultMainView: UIViewController {
 
 extension DefaultMainView: UITableViewDelegate, UITableViewDataSource {
     // MARK: COUNTS OF CELLS:
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         movies.count
     }
-    
+
     // MARK: CUSTOM CELL:
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "MainViewCell", for: indexPath) as? MainViewCell else { return UITableViewCell() }
         let movie = movies[indexPath.row]
         cell.configureEntity(movie: movie)
         return cell
     }
-    
-    // MARK: DELETE CAR:
-    
+
+    // MARK: DELETE MOVIE:
+
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         let movie = movies[indexPath.row]
         if editingStyle == .delete {
@@ -127,11 +196,19 @@ extension DefaultMainView: UITableViewDelegate, UITableViewDataSource {
             present(alertDelete, animated: true)
         }
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let fullMoview = DefaulFullMovieView()
         let movie = movies[indexPath.row]
         fullMoview.configureFullEntity(movie: movie)
         navigationController?.pushViewController(fullMoview, animated: true)
+    }
+}
+
+// MARK: - EXTENSION. SAFARI VIEW CONTROLLER DELEGATE:
+
+extension DefaultMainView: SFSafariViewControllerDelegate {
+    func safariViewControllerWillOpenInBrowser(_ controller: SFSafariViewController) {
+        print("Open in Safari app")
     }
 }

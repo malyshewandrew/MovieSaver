@@ -9,6 +9,8 @@ final class MainViewCell: UITableViewCell {
     private let nameLabel = UILabel()
     private let ratingLabel = UILabel()
     private let defaultRatingLabel = UILabel()
+    private let termsButton = UIButton()
+    private let privacyButton = UIButton()
     
     // MARK: - LIFECYCLE:
 
@@ -27,7 +29,7 @@ final class MainViewCell: UITableViewCell {
     // MARK: - ADD SUBVIEWS:
 
     private func addSubviews() {
-        contentView.addSubview(containerView)
+        contentView.addSubviews(containerView, termsButton, privacyButton)
         containerView.addSubviews(movieImage, infoView)
         infoView.addSubviews(nameLabel, ratingLabel, defaultRatingLabel)
     }
