@@ -83,7 +83,8 @@ final class DefaultRatingScreenView: UIViewController {
     // MARK: - HELPERS:
 
     private func getRating() -> String? {
-        let rating = pickerView.selectedRow(inComponent: 0)
+        let row = pickerView.selectedRow(inComponent: 0)
+        let rating = Double(row) / 10.0
         return String(rating)
     }
     

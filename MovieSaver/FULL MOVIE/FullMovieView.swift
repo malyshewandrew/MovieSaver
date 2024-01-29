@@ -77,7 +77,7 @@ final class DefaulFullMovieView: UIViewController {
 
         defaultRatingMovieLabel.translatesAutoresizingMaskIntoConstraints = false
         defaultRatingMovieLabel.topAnchor.constraint(equalTo: movieNameLabel.bottomAnchor, constant: 14).isActive = true
-        defaultRatingMovieLabel.leadingAnchor.constraint(equalTo: ratingMovieLabel.trailingAnchor, constant: 2).isActive = true
+        defaultRatingMovieLabel.leadingAnchor.constraint(equalTo: ratingMovieLabel.trailingAnchor, constant: 0).isActive = true
         defaultRatingMovieLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
 
         // MARK: RELEASE DATE LABEL:
@@ -87,13 +87,13 @@ final class DefaulFullMovieView: UIViewController {
         releaseDateLabel.leadingAnchor.constraint(equalTo: defaultRatingMovieLabel.trailingAnchor, constant: 8).isActive = true
         releaseDateLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
 
-        // MARK: TEXT VIEW:
+        // MARK: DESCRIPTION TEXT VIEW:
 
         descriptionTextView.translatesAutoresizingMaskIntoConstraints = false
         descriptionTextView.topAnchor.constraint(equalTo: ratingMovieLabel.bottomAnchor, constant: 13).isActive = true
         descriptionTextView.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 19).isActive = true
         descriptionTextView.trailingAnchor.constraint(equalTo: infoView.trailingAnchor, constant: -19).isActive = true
-        descriptionTextView.heightAnchor.constraint(equalToConstant: 138).isActive = true
+        descriptionTextView.bottomAnchor.constraint(equalTo: youtubeWebView.topAnchor, constant: -24).isActive = true
 
         // MARK: WEB VIEW:
 
@@ -114,7 +114,7 @@ final class DefaulFullMovieView: UIViewController {
         // MARK: IMAGE VIEW:
 
         imageView.backgroundColor = .blue
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFill
 
         // MARK: INFO VIEW;
 
@@ -135,19 +135,24 @@ final class DefaulFullMovieView: UIViewController {
         // MARK: RATING MOVIE LABEL:
 
         ratingMovieLabel.backgroundColor = .backgroundAddScreen
-        
+
         // MARK: DEFAULT RATING LABEL:
 
         defaultRatingMovieLabel.text = "/10"
         defaultRatingMovieLabel.textColor = .gray
 
-        // MARK: RELEASE DATE:
+        // MARK: RELEASE DATELABEL :
 
         releaseDateLabel.textColor = .gray
 
-        // MARK: TEXT VIEW:
+        // MARK: DESCRIPTION TEXT VIEW:
+
+        descriptionTextView.backgroundColor = .backgroundAddScreen
+        descriptionTextView.font = UIFont(name: "manrope-thin", size: 14)
 
         // MARK: WEB VIEW:
+
+        youtubeWebView.backgroundColor = .backgroundAddScreen
     }
 
     // MARK: CONFIGURE FULL ENTITY:
@@ -160,7 +165,20 @@ final class DefaulFullMovieView: UIViewController {
         }
         movieNameLabel.text = movie.nameMovie
         ratingMovieLabel.text = movie.ratingMovie
-        releaseDateLabel.text = movie.releaseDateMovie
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd.MM.yyyy"
+
+        if let releaseDateString = movie.releaseDateMovie,
+           let releaseDate = dateFormatter.date(from: releaseDateString)
+        {
+            dateFormatter.dateFormat = "yyyy"
+            let formattedDate = dateFormatter.string(from: releaseDate)
+            releaseDateLabel.text = formattedDate
+        } else {
+            releaseDateLabel.text = "Нет данных"
+        }
+
         descriptionTextView.text = movie.descriptionMovie
         if let url = URL(string: movie.youTubeLinkMovie ?? "") {
             youtubeWebView.load(URLRequest(url: url))

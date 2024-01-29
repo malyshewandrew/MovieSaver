@@ -31,6 +31,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
 
     private let descriptionLabel = UILabel()
     private let descriptionTextView = UITextView()
+    private var descriptionTextViewBottomConstraint: NSLayoutConstraint!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +39,8 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         configureConstraints()
         configureUI()
         configureBindigs()
+        configureGestures()
+        notificationCenter()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -118,7 +121,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         descriptionTextView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 11).isActive = true
         descriptionTextView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 32).isActive = true
         descriptionTextView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -32).isActive = true
-        descriptionTextView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -47).isActive = true
+        descriptionTextView.heightAnchor.constraint(equalToConstant: 100).isActive = true
     }
 
     // MARK: - CONFIGURE UI:
@@ -182,6 +185,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
 
         ratingLabel.text = "Your Rating"
         ratingLabel.textColor = .black
+        ratingLabel.font = UIFont(name: "manrope-regular", size: 18)
 
         // MARK: RATING VALUES:
 
@@ -203,6 +207,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
 
         releaseLabel.text = "Release Date"
         releaseLabel.textColor = .black
+        releaseLabel.font = UIFont(name: "manrope-regular", size: 18)
 
         // MARK: RELEASE DATE LABEL:
 
@@ -224,6 +229,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
 
         youtubeLabel.text = "YouTube Link"
         youtubeLabel.textColor = .black
+        youtubeLabel.font = UIFont(name: "manrope-regular", size: 18)
 
         // MARK: YOUTUBE LINK:
 
@@ -240,11 +246,50 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
 
         descriptionLabel.text = "Description"
         descriptionLabel.textAlignment = .center
+        descriptionLabel.font = UIFont(name: "manrope-regular", size: 18)
 
         // MARK: TEXT VIEW:
 
-        descriptionTextView.text = "Description"
+        descriptionTextView.text = ""
         descriptionTextView.backgroundColor = .clear
+        descriptionTextView.font = UIFont(name: "manrope-light", size: 14)
+    }
+
+    // MARK: - NOTIFICATION CENTER:
+
+    private func notificationCenter() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc func keyboardShow(notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            view.frame.origin.y = -keyboardSize.height
+            UIView.animate(withDuration: 0.5) {
+                self.view.layoutIfNeeded()
+            }
+        }
+    }
+
+    @objc func keyboardHide() {
+        view.frame.origin.y = 0
+        UIView.animate(withDuration: 0.5) {
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    // MARK: - CONFIGURE GESTURES:
+
+    private func configureGestures() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureDone))
+        view.addGestureRecognizer(tapGesture)
+    }
+
+    // MARK: TAP ON FREE SPACE FOR CLOSE ALL VIEWS ACTION:
+
+    @objc func tapGestureDone() {
+        view.endEditing(true)
     }
 
     // MARK: TRANSITIONS:
@@ -345,8 +390,8 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
     // MARK: - SAVE NEW MOVIE:
 
     private func saveMovie() {
-        guard let imageMovie = addImageView.image?.jpegData(compressionQuality: 1.0), let nameMovie = nameLabel.text, !nameMovie.isEmpty, let ratingMovie = ratingValueLabel.text, !ratingMovie.isEmpty, let releaseDateMovie = releaseDateLabel.text, !releaseDateMovie.isEmpty, let youTubeLinkMovie = youtubeLink.text, !youTubeLinkMovie.isEmpty, let descriptionMovie = descriptionTextView.text, !descriptionMovie.isEmpty else { return }
-        
+        guard let imageMovie = addImageView.image?.jpegData(compressionQuality: 1.0), let nameMovie = nameLabel.text, let ratingMovie = ratingValueLabel.text, let releaseDateMovie = releaseDateLabel.text, let youTubeLinkMovie = youtubeLink.text, let descriptionMovie = descriptionTextView.text else { return }
+
         viewModel.saveNewMovie(imageMovie: imageMovie, nameMovie: nameMovie, ratingMovie: ratingMovie, releaseDateMovie: releaseDateMovie, youTubeLinkMovie: youTubeLinkMovie, descriptionMovie: descriptionMovie)
     }
 }

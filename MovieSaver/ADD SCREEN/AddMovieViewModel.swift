@@ -100,17 +100,20 @@ final class DefaultAddMoviewViewModel: AddMovieViewModel {
     var saveNewMovieClosure: ((UIAlertController) -> Void)?
     
     func saveNewMovie(imageMovie: Data?, nameMovie: String?, ratingMovie: String?, releaseDateMovie: String?, youTubeLinkMovie: String?, descriptionMovie: String?) {
-
-        guard let imageMovie = imageMovie,
-              let nameMovie = nameMovie,
-              let ratingMovie = ratingMovie,
-              let releaseDateMovie = releaseDateMovie,
-              let youTubeLinkMovie = youTubeLinkMovie,
-              let descriptionMovie = descriptionMovie
+        guard let imageMovie = imageMovie, imageMovie.count > 0,
+              let nameMovie = nameMovie, nameMovie != "-",
+              let ratingMovie = ratingMovie, ratingMovie != "-",
+              let releaseDateMovie = releaseDateMovie, releaseDateMovie != "-",
+              let youTubeLinkMovie = youTubeLinkMovie, youTubeLinkMovie != "-",
+              let descriptionMovie = descriptionMovie, descriptionMovie != ""
         else {
+            let alertEmpty = UIAlertController(title: "Ошибка", message: "Заполните все поля", preferredStyle: .alert)
+            alertEmpty.addAction(UIAlertAction(title: "Ok", style: .destructive, handler: { _ in
+            }))
+            saveNewMovieClosure?(alertEmpty)
             return
         }
-
+                
         let result = CoreDataManager.instance.saveMovie(imageMovie: imageMovie, nameMovie: nameMovie, ratingMovie: ratingMovie, releaseDateMovie: releaseDateMovie, youTubeLinkMovie: youTubeLinkMovie, descriptionMovie: descriptionMovie)
         
         switch result {
