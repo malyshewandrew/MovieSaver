@@ -79,7 +79,7 @@ final class MainViewCell: UITableViewCell {
 
         defaultRatingLabel.translatesAutoresizingMaskIntoConstraints = false
         defaultRatingLabel.bottomAnchor.constraint(equalTo: infoView.bottomAnchor, constant: -50).isActive = true
-        defaultRatingLabel.leadingAnchor.constraint(equalTo: ratingLabel.trailingAnchor, constant: 3).isActive = true
+        defaultRatingLabel.leadingAnchor.constraint(equalTo: ratingLabel.trailingAnchor, constant: 0).isActive = true
     }
     
     // MARK: - CONFIGURE UI:

@@ -14,6 +14,7 @@ final class DefaulFullMovieView: UIViewController {
     private let descriptionLabel = UILabel()
     private let youtubeWebView = WKWebView()
     private let starImageView = UIImageView()
+    private let dateFormatter = DateFormatter()
 
     // MARK: - LIFECYCLE:
 
@@ -139,11 +140,11 @@ final class DefaulFullMovieView: UIViewController {
         // MARK: DEFAULT RATING LABEL:
 
         defaultRatingMovieLabel.text = "/10"
-        defaultRatingMovieLabel.textColor = .gray
+        defaultRatingMovieLabel.textColor = .darkGray
 
         // MARK: RELEASE DATELABEL :
 
-        releaseDateLabel.textColor = .gray
+        releaseDateLabel.textColor = .lightGray
 
         // MARK: DESCRIPTION TEXT VIEW:
 
@@ -166,7 +167,6 @@ final class DefaulFullMovieView: UIViewController {
         movieNameLabel.text = movie.nameMovie
         ratingMovieLabel.text = movie.ratingMovie
 
-        let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
 
         if let releaseDateString = movie.releaseDateMovie,
@@ -176,7 +176,7 @@ final class DefaulFullMovieView: UIViewController {
             let formattedDate = dateFormatter.string(from: releaseDate)
             releaseDateLabel.text = formattedDate
         } else {
-            releaseDateLabel.text = "Нет данных"
+            releaseDateLabel.text = "No date"
         }
 
         descriptionTextView.text = movie.descriptionMovie
