@@ -203,14 +203,14 @@
 				FB87D1FB2B5B0D9900541723 /* ADD SCREEN */,
 				FB87D1F92B5ABF3C00541723 /* CORE DATA */,
 				FB87D1F82B5ABF2A00541723 /* EXTENSIONS */,
+				FBC4F3222B5AA22600D8E98A /* FONTS */,
 				FB942B862B5A7B9B004DC167 /* Assets.xcassets */,
-				FBC4F3222B5AA22600D8E98A /* Fonts */,
 				FB942B8B2B5A7B9B004DC167 /* Info.plist */,
 			);
 			path = MovieSaver;
 			sourceTree = "<group>";
 		};
-		FBC4F3222B5AA22600D8E98A /* Fonts */ = {
+		FBC4F3222B5AA22600D8E98A /* FONTS */ = {
 			isa = PBXGroup;
 			children = (
 				FBC4F3262B5AA23400D8E98A /* manrope-bold.ttf */,
@@ -220,7 +220,7 @@
 				FBC4F3272B5AA23400D8E98A /* manrope-semibold.ttf */,
 				FBC4F3242B5AA23400D8E98A /* manrope-thin.ttf */,
 			);
-			path = Fonts;
+			path = FONTS;
 			sourceTree = "<group>";
 		};
 		FBE5F7882B66BEE7004B00D6 /* FULL MOVIE */ = {
