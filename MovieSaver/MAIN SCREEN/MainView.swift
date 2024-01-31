@@ -11,7 +11,7 @@ final class DefaultMainView: UIViewController {
     private let webButton = UIButton()
     private let privacyButton = UIButton()
 
-    var movies = [Movie]() {
+    private var movies = [Movie]() {
         didSet {
             tableView.reloadData()
         }

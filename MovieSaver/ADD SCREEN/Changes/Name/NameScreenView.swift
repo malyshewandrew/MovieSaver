@@ -19,13 +19,13 @@ final class DefaultNameScreenView: UIViewController {
 
     // MARK: - ADD SUBVIEWS:
 
-    func addSubviews() {
+    private func addSubviews() {
         view.addSubviews(movieNameLabel, textField, lineTextFieldLabel, saveButton)
     }
 
     // MARK: - CONFIGURE CONSTRAINS:
 
-    func configureConstraints() {
+    private func configureConstraints() {
         // MARK: MOVIE NAME LABEL:
 
         movieNameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -61,7 +61,7 @@ final class DefaultNameScreenView: UIViewController {
 
     // MARK: - CONFIGURE UI:
 
-    func configureUI() {
+    private func configureUI() {
         // MARK: VIEW:
 
         view.backgroundColor = .backgroundAddScreen
