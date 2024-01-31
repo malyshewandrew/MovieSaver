@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="23A344" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Movie" representedClassName="Movie" syncable="YES" codeGenerationType="class">
+        <attribute name="descriptionMovie" attributeType="String"/>
+        <attribute name="imageMovie" attributeType="Binary"/>
+        <attribute name="nameMovie" attributeType="String"/>
+        <attribute name="ratingMovie" attributeType="String"/>
+        <attribute name="releaseDateMovie" attributeType="String"/>
+        <attribute name="youTubeLinkMovie" attributeType="String"/>
+    </entity>
+</model>
