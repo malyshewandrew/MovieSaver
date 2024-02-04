@@ -60,7 +60,7 @@ final class DefaultReleaseScreenView: UIViewController {
         // MARK: YOUR RATING LABEL:
 
         releaseDateLabel.text = "Release Date"
-        releaseDateLabel.textColor = .black
+        releaseDateLabel.textColor = .colorLinks
         releaseDateLabel.textAlignment = .center
         
         // MARK: PICKER VIEW:

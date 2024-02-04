@@ -381,12 +381,6 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         viewModel.openGalery()
     }
 
-    // MARK: OPEN CAMERA:
-
-    @objc func openCamera() {
-        viewModel.openCamera()
-    }
-
     private func setupImage(image: UIImage?) {
         if let image = image {
             DispatchQueue.main.async {

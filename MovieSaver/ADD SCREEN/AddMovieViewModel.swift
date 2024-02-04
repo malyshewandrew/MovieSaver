@@ -4,7 +4,6 @@ import UIKit
 protocol AddMovieViewModel {
     func tapOnALertButton()
     func openGalery()
-    func openCamera()
     var setupAlert: ((UIAlertController) -> Void)? { get set }
     var setupPHPicker: ((PHPickerViewController) -> Void)? { get set }
     var setupUIImagePicker: ((UIImagePickerController) -> Void)? { get set }
@@ -25,6 +24,7 @@ protocol AddMovieViewModel {
 }
 
 final class DefaultAddMoviewViewModel: AddMovieViewModel {
+    
     var popTransition: (() -> Void)?
     
     var transitionRatingScreenView: ((DefaultRatingScreenView) -> Void)?
@@ -71,9 +71,6 @@ final class DefaultAddMoviewViewModel: AddMovieViewModel {
     
     func tapOnALertButton() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
-            self.openCamera()
-        }))
         alert.addAction(UIAlertAction(title: "Galery", style: .default, handler: { _ in
             self.openGalery()
         }))
@@ -88,16 +85,6 @@ final class DefaultAddMoviewViewModel: AddMovieViewModel {
         configurator.selectionLimit = 1
         let picker = PHPickerViewController(configuration: configurator)
         setupPHPicker?(picker)
-    }
-    
-    func openCamera() {
-        let imagePicker = UIImagePickerController()
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            imagePicker.sourceType = .camera
-        } else {
-            print("Камера не доступна")
-        }
-        setupUIImagePicker?(imagePicker)
     }
     
     var saveNewMovieClosure: ((UIAlertController) -> Void)?

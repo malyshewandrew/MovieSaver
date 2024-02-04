@@ -62,7 +62,7 @@ final class DefaultRatingScreenView: UIViewController {
         // MARK: YOUR RATING LABEL:
 
         yourRatingLabel.text = "Your Rating"
-        yourRatingLabel.textColor = .black
+        yourRatingLabel.textColor = .colorLinks
         yourRatingLabel.textAlignment = .center
 
         // MARK: SAVE BUTTON:
