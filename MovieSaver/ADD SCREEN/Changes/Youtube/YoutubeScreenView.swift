@@ -68,7 +68,7 @@ final class DefaultYoutubeScreenView: UIViewController {
 
         // MARK: MOVIE NAME LABEL:
 
-        youtubeLinkLabel.text = "YouTube Link"
+        youtubeLinkLabel.text = "https://www.youtube.com/..."
         youtubeLinkLabel.textAlignment = .center
 
         // MARK: TEXT FIELD:

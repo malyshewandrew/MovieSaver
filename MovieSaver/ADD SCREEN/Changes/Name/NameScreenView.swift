@@ -68,7 +68,7 @@ final class DefaultNameScreenView: UIViewController {
 
         // MARK: MOVIE NAME LABEL:
 
-        movieNameLabel.text = "Film Name"
+        movieNameLabel.text = "Enter film Name"
         movieNameLabel.textAlignment = .center
 
         // MARK: TEXT FIELD:

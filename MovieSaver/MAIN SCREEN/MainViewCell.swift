@@ -40,11 +40,11 @@ final class MainViewCell: UITableViewCell {
         // MARK: CONTAINER VIEW:
 
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 22).isActive = true
-        containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 22).isActive = true
-        containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -18).isActive = true
+        containerView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5).isActive = true
+        containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
+        containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
+        containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5).isActive = true
         containerView.heightAnchor.constraint(equalToConstant: 212).isActive = true
-        containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -22).isActive = true
         
         // MARK: MOVIE IMAGE:
 
@@ -52,7 +52,8 @@ final class MainViewCell: UITableViewCell {
         movieImage.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         movieImage.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         movieImage.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        movieImage.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.57).isActive = true
+        movieImage.trailingAnchor.constraint(equalTo: containerView.centerXAnchor, constant: -20).isActive = true
+//        movieImage.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.57).isActive = true
         
         // MARK: INFO VIEW:
 
@@ -60,7 +61,7 @@ final class MainViewCell: UITableViewCell {
         infoView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         infoView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
         infoView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor).isActive = true
-        infoView.leadingAnchor.constraint(equalTo: movieImage.trailingAnchor).isActive = true
+        infoView.leadingAnchor.constraint(equalTo: containerView.centerXAnchor, constant: 20).isActive = true
         
         // MARK: NAME LABEL:
 
@@ -98,6 +99,7 @@ final class MainViewCell: UITableViewCell {
         containerView.layer.shadowOpacity = 0.10
         
         // MARK: MOVIE IMAGE:
+        movieImage.contentMode = .scaleAspectFill
         
         // MARK: INFO VIEW:
         

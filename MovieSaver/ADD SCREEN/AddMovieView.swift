@@ -148,6 +148,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         addImageView.backgroundColor = .circleAddScreen
         addImageView.layer.masksToBounds = true
         addImageView.layer.cornerRadius = 75
+        addImageView.contentMode = .scaleAspectFill
 
         // MARK: SELECT IMAGE BUTTON:
 
