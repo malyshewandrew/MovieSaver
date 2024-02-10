@@ -4,6 +4,7 @@ final class MainViewCell: UITableViewCell {
     // MARK: - PROPERTIES:
     
     private let containerView = UIView()
+    private let containerImageVIew = UIView()
     private let movieImage = UIImageView()
     private let infoView = UIView()
     private let nameLabel = UILabel()
@@ -29,8 +30,9 @@ final class MainViewCell: UITableViewCell {
     // MARK: - ADD SUBVIEWS:
 
     private func addSubviews() {
-        contentView.addSubviews(containerView, termsButton, privacyButton)
-        containerView.addSubviews(movieImage, infoView)
+        contentView.addSubviews(containerView, containerImageVIew, termsButton, privacyButton)
+        containerView.addSubviews(infoView)
+        containerImageVIew.addSubview(movieImage)
         infoView.addSubviews(nameLabel, ratingLabel, defaultRatingLabel)
     }
     
@@ -44,16 +46,22 @@ final class MainViewCell: UITableViewCell {
         containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
         containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
         containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5).isActive = true
-        containerView.heightAnchor.constraint(equalToConstant: 212).isActive = true
+        containerView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        
+        // MARK: CONTAINER IMAGE VIEW:
+        containerImageVIew.translatesAutoresizingMaskIntoConstraints = false
+        containerImageVIew.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
+        containerImageVIew.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
+        containerImageVIew.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
+        containerImageVIew.trailingAnchor.constraint(equalTo: containerView.centerXAnchor, constant: 20).isActive = true
         
         // MARK: MOVIE IMAGE:
 
         movieImage.translatesAutoresizingMaskIntoConstraints = false
-        movieImage.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
-        movieImage.bottomAnchor.constraint(equalTo: containerView.bottomAnchor).isActive = true
-        movieImage.leadingAnchor.constraint(equalTo: containerView.leadingAnchor).isActive = true
-        movieImage.trailingAnchor.constraint(equalTo: containerView.centerXAnchor, constant: -20).isActive = true
-//        movieImage.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.57).isActive = true
+        movieImage.topAnchor.constraint(equalTo: containerImageVIew.topAnchor).isActive = true
+        movieImage.bottomAnchor.constraint(equalTo: containerImageVIew.bottomAnchor).isActive = true
+        movieImage.leadingAnchor.constraint(equalTo: containerImageVIew.leadingAnchor).isActive = true
+        movieImage.trailingAnchor.constraint(equalTo: containerImageVIew.trailingAnchor).isActive = true
         
         // MARK: INFO VIEW:
 
@@ -99,7 +107,7 @@ final class MainViewCell: UITableViewCell {
         containerView.layer.shadowOpacity = 0.10
         
         // MARK: MOVIE IMAGE:
-        movieImage.contentMode = .scaleAspectFill
+        movieImage.contentMode = .scaleToFill
         
         // MARK: INFO VIEW:
         
