@@ -73,8 +73,8 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         addImageButton.translatesAutoresizingMaskIntoConstraints = false
         addImageButton.centerXAnchor.constraint(equalTo: addImageView.centerXAnchor).isActive = true
         addImageButton.centerYAnchor.constraint(equalTo: addImageView.centerYAnchor).isActive = true
-        addImageButton.heightAnchor.constraint(equalTo: addImageView.heightAnchor, multiplier: 1).isActive = true
-        addImageButton.widthAnchor.constraint(equalTo: addImageView.widthAnchor, multiplier: 1).isActive = true
+        addImageButton.heightAnchor.constraint(equalTo: addImageView.heightAnchor, multiplier: 0.4).isActive = true
+        addImageButton.widthAnchor.constraint(equalTo: addImageView.widthAnchor, multiplier: 0.4).isActive = true
 
         // MARK: NAME STACK VIEW:
 
@@ -133,7 +133,7 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
 
         // MARK: TITLE:
 
-        title = "Add new"
+        title = "Add new film"
 
         // MARK: NAVIGATION CONTROLLER:
 
@@ -260,6 +260,8 @@ final class DefaultAddMovieView: UIViewController, UIImagePickerControllerDelega
         descriptionTextView.font = UIFont(name: "manrope-light", size: 14)
         descriptionTextView.layer.borderWidth = 1
         descriptionTextView.layer.borderColor = UIColor.gray.cgColor
+        descriptionTextView.layer.masksToBounds = true
+        descriptionTextView.layer.cornerRadius = 15
     }
 
     // MARK: - NOTIFICATION CENTER:

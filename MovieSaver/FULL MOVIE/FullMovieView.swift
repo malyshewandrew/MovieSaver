@@ -180,6 +180,7 @@ final class DefaulFullMovieView: UIViewController {
         }
 
         descriptionTextView.text = movie.descriptionMovie
+        
         if let url = URL(string: movie.youTubeLinkMovie ?? "") {
             youtubeWebView.load(URLRequest(url: url))
         }
