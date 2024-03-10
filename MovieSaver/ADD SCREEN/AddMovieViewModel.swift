@@ -90,11 +90,12 @@ final class DefaultAddMoviewViewModel: AddMovieViewModel {
     var saveNewMovieClosure: ((UIAlertController) -> Void)?
     
     func saveNewMovie(imageMovie: Data?, nameMovie: String?, ratingMovie: String?, releaseDateMovie: String?, youTubeLinkMovie: String?, descriptionMovie: String?) {
-        guard let imageMovie = imageMovie, imageMovie.count > 0,
-              let nameMovie = nameMovie, nameMovie != "-",
-              let ratingMovie = ratingMovie, ratingMovie != "-",
-              let releaseDateMovie = releaseDateMovie, releaseDateMovie != "-",
-              let youTubeLinkMovie = youTubeLinkMovie, youTubeLinkMovie != "-",
+        
+        guard let imageMovie = imageMovie, imageMovie.count > 0, !imageMovie.isEmpty,
+              let nameMovie = nameMovie, nameMovie != "-", nameMovie != "",
+              let ratingMovie = ratingMovie, ratingMovie != "-", ratingMovie != "",
+              let releaseDateMovie = releaseDateMovie, releaseDateMovie != "-", releaseDateMovie != "",
+              let youTubeLinkMovie = youTubeLinkMovie, youTubeLinkMovie != "-", youTubeLinkMovie != "",
               let descriptionMovie = descriptionMovie, descriptionMovie != ""
         else {
             let alertEmpty = UIAlertController(title: "Error", message: "Fill in all the fields", preferredStyle: .alert)
