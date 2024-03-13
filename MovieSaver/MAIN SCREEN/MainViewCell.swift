@@ -77,17 +77,18 @@ final class MainViewCell: UITableViewCell {
         nameLabel.topAnchor.constraint(equalTo: infoView.topAnchor, constant: 34).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor, constant: 15).isActive = true
         nameLabel.trailingAnchor.constraint(equalTo: infoView.trailingAnchor, constant: -15).isActive = true
+        nameLabel.bottomAnchor.constraint(equalTo: infoView.centerYAnchor, constant: -5).isActive = true
         
         // MARK: RATING LABEL:
 
         ratingLabel.translatesAutoresizingMaskIntoConstraints = false
-        ratingLabel.bottomAnchor.constraint(equalTo: infoView.bottomAnchor, constant: -50).isActive = true
+        ratingLabel.topAnchor.constraint(equalTo: infoView.centerYAnchor, constant: 5).isActive = true
         ratingLabel.trailingAnchor.constraint(equalTo: infoView.centerXAnchor, constant: 0).isActive = true
         
         // MARK: DEFAULT RATING LABEL:
 
         defaultRatingLabel.translatesAutoresizingMaskIntoConstraints = false
-        defaultRatingLabel.bottomAnchor.constraint(equalTo: infoView.bottomAnchor, constant: -50).isActive = true
+        defaultRatingLabel.topAnchor.constraint(equalTo: infoView.centerYAnchor, constant: 5).isActive = true
         defaultRatingLabel.leadingAnchor.constraint(equalTo: ratingLabel.trailingAnchor, constant: 0).isActive = true
     }
     
@@ -102,12 +103,14 @@ final class MainViewCell: UITableViewCell {
 
         containerView.backgroundColor = .backgroundAddScreen
         containerView.layer.masksToBounds = true
-        containerView.layer.cornerRadius = 8
+        containerView.layer.cornerRadius = 15
         containerView.layer.shadowRadius = 16
         containerView.layer.shadowOpacity = 0.10
         
         // MARK: MOVIE IMAGE:
-        movieImage.contentMode = .scaleToFill
+        movieImage.contentMode = .scaleAspectFill
+        movieImage.layer.masksToBounds = true
+        movieImage.layer.cornerRadius = 15
         
         // MARK: INFO VIEW:
         
@@ -116,6 +119,7 @@ final class MainViewCell: UITableViewCell {
         nameLabel.numberOfLines = 0
         nameLabel.font = UIFont(name: "manrope-regular", size: 24)
         nameLabel.textAlignment = .center
+        nameLabel.adjustsFontSizeToFitWidth = true
         
         // MARK: RATING LABEL:
 
